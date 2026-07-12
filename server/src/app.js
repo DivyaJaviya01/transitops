@@ -8,6 +8,7 @@ import tripRoutes from './modules/trip/trip.routes.js';
 import maintenanceRoutes from './modules/maintenance/maintenance.routes.js';
 import expenseRoutes from './modules/expense/expense.routes.js';
 import reportRoutes from './modules/report/report.routes.js';
+import notificationRoutes from './modules/notification/notification.routes.js';
 import { errorHandler } from './middleware/error.js';
 
 const app = express();
@@ -28,6 +29,7 @@ app.use('/api/trips', tripRoutes);
 app.use('/api/maintenance', maintenanceRoutes);
 app.use('/api/expenses', expenseRoutes);
 app.use('/api/reports', reportRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 // Global Error Handler
 app.use(errorHandler);

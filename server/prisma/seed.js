@@ -6,6 +6,7 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('Seeding database...');
 
+  await prisma.notification.deleteMany();
   await prisma.expense.deleteMany();
   await prisma.fuelLog.deleteMany();
   await prisma.maintenanceLog.deleteMany();
@@ -168,6 +169,22 @@ async function main() {
     await prisma.expense.create({ data: e });
   }
   console.log(`Seeded ${expenses.length} expenses`);
+
+  const notifications = [
+    { title: 'Trip Completed', message: 'David Harrison completed route NY → LA (TRP-001)', type: 'success', link: '/trips' },
+    { title: 'Maintenance Alert', message: 'VT-1102-S (Delivery Van) entered maintenance - Oil Change', type: 'warning', link: '/maintenance' },
+    { title: 'License Expiring', message: 'Elena Rodriguez license expires in 12 days', type: 'error', link: '/drivers' },
+    { title: 'New Trip Dispatched', message: 'Marcus Chen dispatched on VT-9921-M from TX to NY', type: 'info', link: '/trips' },
+    { title: 'Fleet Update', message: '42 drivers checked-in for morning shift', type: 'info' },
+    { title: 'Vehicle Retired', message: 'VT-0021-R (Kenworth T680) has been decommissioned', type: 'warning', link: '/vehicles' },
+    { title: 'Fuel Logged', message: 'Sarah Jenkins logged 55.8L fuel for VT-5511-J', type: 'info', link: '/expenses' },
+    { title: 'Safety Score Update', message: 'Michael Torres safety score dropped to 82.9', type: 'warning', link: '/drivers' },
+  ];
+
+  for (const n of notifications) {
+    await prisma.notification.create({ data: n });
+  }
+  console.log(`Seeded ${notifications.length} notifications`);
 
   console.log('\n=== Login Credentials ===');
   console.log('Fleet Manager:  manager@transitops.com / divya123');
