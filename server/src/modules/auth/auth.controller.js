@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { randomUUID } from 'crypto';
 import prisma from '../../config/db.js';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'transitops-secret-key-12345';
@@ -33,6 +34,7 @@ export async function registerUser(req, res, next) {
     // Create user
     const user = await prisma.user.create({
       data: {
+        id: randomUUID(),
         email,
         password: hashedPassword,
         name,
