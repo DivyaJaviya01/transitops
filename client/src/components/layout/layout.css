@@ -22,11 +22,25 @@
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-sm);
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
   z-index: 100;
   overflow-y: auto;
   transition: width 0.2s ease, background-color 0.2s, border-color 0.2s;
   flex-shrink: 0;
+}
+
+.layout-content {
+  margin-left: 280px;
+  width: calc(100% - 280px);
+  transition: margin-left 0.2s ease, width 0.2s ease;
+}
+
+.layout-content.sidebar-collapsed {
+  margin-left: 70px;
+  width: calc(100% - 70px);
 }
 
 /* Collapsed Sidebar State */

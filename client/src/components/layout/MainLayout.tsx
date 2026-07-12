@@ -19,7 +19,7 @@ const MainLayout = ({ children }: Props) => {
     <div className="layout-shell">
       <Sidebar isCollapsed={isCollapsed} />
 
-      <div className="layout-content">
+      <div className={`layout-content ${isCollapsed ? 'sidebar-collapsed' : ''}`}>
         <Navbar onToggleSidebar={toggleSidebar} />
         <div className="main-content">
           <div className="content-wrapper">
