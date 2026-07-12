@@ -165,23 +165,23 @@ const DriversPage = () => {
           </div>
         </section>
         
-        <section className="bg-white rounded-xl border border-outline-variant shadow-sm overflow-hidden mt-8">
-          <div className="px-6 py-4 border-b border-outline-variant flex flex-col md:flex-row gap-4 items-start md:items-center justify-between bg-surface-container-lowest">
+        <section className="bg-white rounded-xl border border-gray-200 shadow-sm mt-8">
+          <div className="px-6 py-4 border-b border-gray-200 flex flex-col md:flex-row gap-4 items-start md:items-center justify-between bg-gray-50/50">
             <div className="flex flex-wrap items-center gap-4 w-full md:w-auto">
-              <div className="flex bg-surface-container-low rounded-lg p-1 border border-outline-variant">
-                <button onClick={() => setViewMode('list')} className={`px-4 py-1.5 rounded-md text-label-md flex items-center gap-2 transition-colors ${viewMode === 'list' ? 'bg-white shadow-sm text-on-surface' : 'text-outline hover:text-on-surface'}`}>
+              <div className="flex bg-gray-100 rounded-lg p-1 border border-gray-200">
+                <button onClick={() => setViewMode('list')} className={`px-4 py-1.5 rounded-md text-[13px] font-semibold flex items-center gap-2 transition-colors cursor-pointer ${viewMode === 'list' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:text-gray-900'}`}>
                   <span className="material-symbols-outlined text-[18px]">list</span>
                   List
                 </button>
-                <button onClick={() => setViewMode('grid')} className={`px-4 py-1.5 rounded-md text-label-md flex items-center gap-2 transition-colors ${viewMode === 'grid' ? 'bg-white shadow-sm text-on-surface' : 'text-outline hover:text-on-surface'}`}>
+                <button onClick={() => setViewMode('grid')} className={`px-4 py-1.5 rounded-md text-[13px] font-semibold flex items-center gap-2 transition-colors cursor-pointer ${viewMode === 'grid' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:text-gray-900'}`}>
                   <span className="material-symbols-outlined text-[18px]">grid_view</span>
                   Grid
                 </button>
               </div>
-              <div className="h-6 w-px bg-outline-variant"></div>
+              <div className="h-6 w-px bg-gray-200"></div>
               <div className="flex items-center gap-2">
-                <span className="text-label-md text-outline">Status:</span>
-                <select className="bg-transparent border-none text-label-md font-bold focus:ring-0 cursor-pointer" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+                <span className="text-[13px] font-semibold text-gray-500">Status:</span>
+                <select className="bg-transparent border-0 text-[13px] font-bold focus:ring-0 cursor-pointer" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
                   <option value="">All Statuses</option>
                   <option value="On Trip">On Trip</option>
                   <option value="Available">Available</option>
@@ -191,30 +191,31 @@ const DriversPage = () => {
               </div>
             </div>
             <div className="flex flex-wrap items-center gap-3 w-full md:w-auto mt-2 md:mt-0">
-              <button onClick={() => setShowAddDriver(true)} className="bg-secondary text-white px-4 py-2 rounded-lg text-[12px] font-bold flex items-center gap-2 hover:opacity-90 transition-all shadow-sm">
+              <button onClick={() => setShowAddDriver(true)} className="bg-blue-600 text-white px-4 py-2 rounded-lg text-[12px] font-bold flex items-center gap-2 hover:bg-blue-700 transition-all shadow-sm cursor-pointer">
                 <span className="material-symbols-outlined text-[18px]">person_add</span>
                 ADD DRIVER
               </button>
-              <button onClick={handleExportCSV} className="text-label-md font-bold text-outline flex items-center gap-1 hover:bg-surface-container-low px-3 py-2 rounded-lg transition-colors border border-outline-variant">
+              <button onClick={handleExportCSV} className="text-[13px] font-bold text-gray-500 flex items-center gap-1 hover:bg-gray-100 px-3 py-2 rounded-lg transition-colors border border-gray-200 cursor-pointer">
                 <span className="material-symbols-outlined text-[18px]">file_download</span>
                 Export CSV
               </button>
             </div>
           </div>
-          
+
+          {viewMode === 'list' ? (
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
-              <thead className="bg-surface-container-low/50 sticky top-0 border-b border-outline-variant">
+              <thead className="bg-gray-50/80 sticky top-0 border-b border-gray-200">
                 <tr>
-                  <th className="px-6 py-4 font-label-md text-outline uppercase tracking-wider">Personnel Name</th>
-                  <th className="px-6 py-4 font-label-md text-outline uppercase tracking-wider">ID / License</th>
-                  <th className="px-6 py-4 font-label-md text-outline uppercase tracking-wider">Status</th>
-                  <th className="px-6 py-4 font-label-md text-outline uppercase tracking-wider text-center">Safety Score</th>
-                  <th className="px-6 py-4 font-label-md text-outline uppercase tracking-wider">License Expiry</th>
-                  <th className="px-6 py-4 font-label-md text-outline uppercase tracking-wider text-right">Actions</th>
+                  <th className="px-6 py-4 text-[11px] font-bold text-gray-500 uppercase tracking-wider">Personnel Name</th>
+                  <th className="px-6 py-4 text-[11px] font-bold text-gray-500 uppercase tracking-wider">ID / License</th>
+                  <th className="px-6 py-4 text-[11px] font-bold text-gray-500 uppercase tracking-wider">Status</th>
+                  <th className="px-6 py-4 text-[11px] font-bold text-gray-500 uppercase tracking-wider text-center">Safety Score</th>
+                  <th className="px-6 py-4 text-[11px] font-bold text-gray-500 uppercase tracking-wider">License Expiry</th>
+                  <th className="px-6 py-4 text-[11px] font-bold text-gray-500 uppercase tracking-wider text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-outline-variant">
+              <tbody className="divide-y divide-gray-100">
                 {isLoading && (
                   <tr><td colSpan={6} style={{ textAlign: 'center', padding: '2rem', color: '#76777d' }}>Loading drivers...</td></tr>
                 )}
@@ -224,20 +225,20 @@ const DriversPage = () => {
                 {drivers.map((d: any) => {
                   const daysLeft = Math.ceil((new Date(d.licenseExpiryDate).getTime() - Date.now()) / (1000 * 60 * 60 * 24));
                   return (
-                    <tr className="hover:bg-surface-container-low/30 transition-colors group" key={d.id}>
+                    <tr className="hover:bg-gray-50/50 transition-colors group" key={d.id}>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-full bg-primary-container/20 text-primary flex items-center justify-center font-bold text-sm">
+                          <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm">
                             {d.name.split(' ').map((n: string) => n[0]).join('').slice(0, 2).toUpperCase()}
                           </div>
                           <div>
-                            <p className="font-body-md text-on-surface font-semibold">{d.name}</p>
-                            <p className="text-label-sm text-outline">{d.licenseCategory}</p>
+                            <p className="text-[14px] text-gray-900 font-semibold">{d.name}</p>
+                            <p className="text-[12px] text-gray-500">{d.licenseCategory}</p>
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 font-tabular-nums text-body-sm">
-                        <p className="text-on-surface">#{d.licenseNumber}</p>
+                      <td className="px-6 py-4 text-[13px]">
+                        <p className="text-gray-900">#{d.licenseNumber}</p>
                       </td>
                       <td className="px-6 py-4">
                         <span className={statusBadge[d.status] || statusBadge['Available']}>
@@ -247,20 +248,20 @@ const DriversPage = () => {
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex flex-col items-center gap-1">
-                          <span className="font-tabular-nums font-bold" style={{ color: d.safetyScore >= 90 ? '#166534' : d.safetyScore >= 80 ? '#92400e' : '#dc2626' }}>{d.safetyScore}</span>
-                          <div className="w-20 h-1.5 bg-surface-container rounded-full overflow-hidden">
+                          <span className="font-bold" style={{ color: d.safetyScore >= 90 ? '#166534' : d.safetyScore >= 80 ? '#92400e' : '#dc2626' }}>{d.safetyScore}</span>
+                          <div className="w-20 h-1.5 bg-gray-100 rounded-full overflow-hidden">
                             <div className="h-full rounded-full" style={{ width: `${d.safetyScore}%`, backgroundColor: d.safetyScore >= 90 ? '#16a34a' : d.safetyScore >= 80 ? '#d97706' : '#dc2626' }}></div>
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 font-tabular-nums text-body-sm">
-                        <p className="text-on-surface">{new Date(d.licenseExpiryDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
+                      <td className="px-6 py-4 text-[13px]">
+                        <p className="text-gray-900">{new Date(d.licenseExpiryDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
                         <p className={`text-[11px] font-bold ${daysLeft <= 30 ? 'text-red-600' : daysLeft <= 90 ? 'text-amber-600' : 'text-green-600'}`}>
                           {daysLeft <= 0 ? 'EXPIRED' : `${daysLeft} days left`}
                         </p>
                       </td>
                       <td className="px-6 py-4 text-right">
-                        <button className="text-outline hover:text-secondary p-1 rounded-lg transition-colors">
+                        <button className="text-gray-500 hover:text-blue-600 p-1 rounded-lg transition-colors cursor-pointer">
                           <span className="material-symbols-outlined">more_vert</span>
                         </button>
                       </td>
@@ -270,6 +271,51 @@ const DriversPage = () => {
               </tbody>
             </table>
           </div>
+          ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-6">
+            {isLoading && <p className="col-span-full text-center text-gray-500 py-8">Loading drivers...</p>}
+            {!isLoading && drivers.length === 0 && <p className="col-span-full text-center text-gray-500 py-8">No drivers found</p>}
+            {drivers.map((d: any) => {
+              const daysLeft = Math.ceil((new Date(d.licenseExpiryDate).getTime() - Date.now()) / (1000 * 60 * 60 * 24));
+              return (
+                <div key={d.id} className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md transition-shadow">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg">
+                      {d.name.split(' ').map((n: string) => n[0]).join('').slice(0, 2).toUpperCase()}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900">{d.name}</p>
+                      <p className="text-[12px] text-gray-500">{d.licenseCategory}</p>
+                    </div>
+                  </div>
+                  <div className="space-y-2 text-[13px]">
+                    <div className="flex justify-between">
+                      <span className="text-gray-500">License</span>
+                      <span className="text-gray-900 font-medium">#{d.licenseNumber}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-500">Status</span>
+                      <span className={statusBadge[d.status] || statusBadge['Available']}>
+                        <span className={`w-1.5 h-1.5 rounded-full ${statusDot[d.status] || 'bg-green-700'}`}></span>
+                        {d.status}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-500">Safety Score</span>
+                      <span className="font-bold" style={{ color: d.safetyScore >= 90 ? '#166534' : d.safetyScore >= 80 ? '#92400e' : '#dc2626' }}>{d.safetyScore}/100</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-500">License Expiry</span>
+                      <span className={`font-bold ${daysLeft <= 30 ? 'text-red-600' : daysLeft <= 90 ? 'text-amber-600' : 'text-green-600'}`}>
+                        {new Date(d.licenseExpiryDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          )}
         </section>
         {showAddDriver && (
           <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50" onClick={() => setShowAddDriver(false)}>
