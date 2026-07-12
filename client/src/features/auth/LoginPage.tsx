@@ -32,20 +32,18 @@ const LoginPage = () => {
   return (
     <div className="login-page">
       <div className="login-left">
-        <div className="login-left-top">
-          <div className="login-logo-placeholder" />
+        <div className="login-left-center">
+          <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="60" height="60" rx="14" fill="white" />
+            <rect x="8" y="8" width="44" height="44" rx="10" fill="#1f2937" />
+            <path d="M30 16L40 22.5V35.5L30 42L20 35.5V22.5L30 16Z" fill="none" stroke="#f59e0b" strokeWidth="2.5" strokeLinejoin="round" />
+            <path d="M24 25L30 21L36 25" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M30 21V32" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" />
+            <path d="M24 29.5L30 34L36 29.5" stroke="#f59e0b" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
           <div className="login-brand">
             <h1>TransitOps</h1>
             <p>Smart Transport Operations Platform</p>
-          </div>
-          <div className="login-roles">
-            <h3>One login, four roles:</h3>
-            <ul>
-              <li><span className="role-bullet" /> Fleet Manager</li>
-              <li><span className="role-bullet" /> Dispatcher</li>
-              <li><span className="role-bullet" /> Safety Officer</li>
-              <li><span className="role-bullet" /> Financial Analyst</li>
-            </ul>
           </div>
         </div>
         <div className="login-footer">TRANSITOPS &copy; 2026 - RBAC EX4</div>
