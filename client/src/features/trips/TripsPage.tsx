@@ -89,6 +89,9 @@ const TripsPage = () => {
       queryClient.invalidateQueries({ queryKey: ['kpis'] });
       queryClient.invalidateQueries({ queryKey: ['available-vehicles'] });
       queryClient.invalidateQueries({ queryKey: ['available-drivers'] });
+      queryClient.invalidateQueries({ queryKey: ['vehicles'] });
+      queryClient.invalidateQueries({ queryKey: ['drivers'] });
+      queryClient.invalidateQueries({ queryKey: ['recent-trips'] });
       toast.success('Trip created successfully in Draft!');
       setShowModal(false);
       setForm({
@@ -114,6 +117,9 @@ const TripsPage = () => {
       queryClient.invalidateQueries({ queryKey: ['kpis'] });
       queryClient.invalidateQueries({ queryKey: ['available-vehicles'] });
       queryClient.invalidateQueries({ queryKey: ['available-drivers'] });
+      queryClient.invalidateQueries({ queryKey: ['vehicles'] });
+      queryClient.invalidateQueries({ queryKey: ['drivers'] });
+      queryClient.invalidateQueries({ queryKey: ['recent-trips'] });
       toast.success('Trip successfully dispatched!');
     },
     onError: (err: any) => {
@@ -130,6 +136,9 @@ const TripsPage = () => {
       queryClient.invalidateQueries({ queryKey: ['kpis'] });
       queryClient.invalidateQueries({ queryKey: ['available-vehicles'] });
       queryClient.invalidateQueries({ queryKey: ['available-drivers'] });
+      queryClient.invalidateQueries({ queryKey: ['vehicles'] });
+      queryClient.invalidateQueries({ queryKey: ['drivers'] });
+      queryClient.invalidateQueries({ queryKey: ['recent-trips'] });
       toast.success('Trip marked as completed!');
       setShowCompleteModal(false);
       setSelectedTripId(null);
@@ -149,6 +158,9 @@ const TripsPage = () => {
       queryClient.invalidateQueries({ queryKey: ['kpis'] });
       queryClient.invalidateQueries({ queryKey: ['available-vehicles'] });
       queryClient.invalidateQueries({ queryKey: ['available-drivers'] });
+      queryClient.invalidateQueries({ queryKey: ['vehicles'] });
+      queryClient.invalidateQueries({ queryKey: ['drivers'] });
+      queryClient.invalidateQueries({ queryKey: ['recent-trips'] });
       toast.success('Trip has been cancelled.');
     },
     onError: (err: any) => {

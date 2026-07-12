@@ -58,6 +58,9 @@ const MaintenancePage = () => {
       queryClient.invalidateQueries({ queryKey: ['maintenance-logs'] });
       queryClient.invalidateQueries({ queryKey: ['vehicles'] });
       queryClient.invalidateQueries({ queryKey: ['kpis'] });
+      queryClient.invalidateQueries({ queryKey: ['available-vehicles'] });
+      queryClient.invalidateQueries({ queryKey: ['vehicles-expense-options'] });
+      queryClient.invalidateQueries({ queryKey: ['vehicles-report'] });
       toast.success('Vehicle placed in shop for maintenance successfully!');
       setShowModal(false);
       setForm({
@@ -83,6 +86,9 @@ const MaintenancePage = () => {
       queryClient.invalidateQueries({ queryKey: ['maintenance-logs'] });
       queryClient.invalidateQueries({ queryKey: ['vehicles'] });
       queryClient.invalidateQueries({ queryKey: ['kpis'] });
+      queryClient.invalidateQueries({ queryKey: ['available-vehicles'] });
+      queryClient.invalidateQueries({ queryKey: ['vehicles-expense-options'] });
+      queryClient.invalidateQueries({ queryKey: ['vehicles-report'] });
       toast.success('Maintenance completed. Vehicle returned to Available status.');
     },
     onError: (err: any) => {
