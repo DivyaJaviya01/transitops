@@ -3,11 +3,112 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    Int    @id @default(autoincrement())
-  email String @unique
+model driver {
+  id                String   @id
+  name              String
+  licenseNumber     String   @unique(map: "Driver_licenseNumber_key")
+  licenseCategory   String
+  licenseExpiryDate DateTime
+  contactNumber     String
+  safetyScore       Float    @default(100)
+  status            String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime
+  trip              trip[]
 }
+
+model expense {
+  id          String   @id
+  amount      Float
+  date        DateTime
+  category    String
+  description String?
+  vehicleId   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  vehicle     vehicle  @relation(fields: [vehicleId], references: [registrationNumber], map: "Expense_vehicleId_fkey")
+
+  @@index([vehicleId], map: "Expense_vehicleId_fkey")
+}
+
+model fuellog {
+  id        String   @id
+  liters    Float
+  cost      Float
+  date      DateTime
+  vehicleId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  vehicle   vehicle  @relation(fields: [vehicleId], references: [registrationNumber], map: "FuelLog_vehicleId_fkey")
+
+  @@index([vehicleId], map: "FuelLog_vehicleId_fkey")
+}
+
+model maintenancelog {
+  id                      String    @id
+  type                    String
+  cost                    Float
+  startDate               DateTime
+  estimatedCompletionDate DateTime
+  actualCompletionDate    DateTime?
+  status                  String
+  vehicleId               String
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime
+  vehicle                 vehicle   @relation(fields: [vehicleId], references: [registrationNumber], map: "MaintenanceLog_vehicleId_fkey")
+
+  @@index([vehicleId], map: "MaintenanceLog_vehicleId_fkey")
+}
+
+model trip {
+  id              String    @id
+  source          String
+  destination     String
+  cargoWeight     Float
+  plannedDistance Float
+  actualDistance  Float?
+  fuelConsumed    Float?
+  status          String
+  vehicleId       String
+  driverId        String
+  dispatchedAt    DateTime?
+  completedAt     DateTime?
+  cancelledAt     DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime
+  driver          driver    @relation(fields: [driverId], references: [id], map: "Trip_driverId_fkey")
+  vehicle         vehicle   @relation(fields: [vehicleId], references: [registrationNumber], map: "Trip_vehicleId_fkey")
+
+  @@index([driverId], map: "Trip_driverId_fkey")
+  @@index([vehicleId], map: "Trip_vehicleId_fkey")
+}
+
+model user {
+  id        String   @id
+  email     String   @unique(map: "User_email_key")
+  password  String
+  name      String
+  role      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+}
+
+model vehicle {
+  registrationNumber String           @id @unique(map: "Vehicle_registrationNumber_key")
+  name               String
+  type               String
+  maxLoadCapacity    Float
+  odometer           Float
+  acquisitionCost    Float
+  status             String
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime
+  expense            expense[]
+  fuellog            fuellog[]
+  maintenancelog     maintenancelog[]
+  trip               trip[]
+que
