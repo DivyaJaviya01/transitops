@@ -74,6 +74,7 @@ const VehicleRegistry: React.FC = () => {
   const [statusFilter, setStatusFilter] = useState('');
   const [typeFilter, setTypeFilter] = useState('');
   const [showAddVehicle, setShowAddVehicle] = useState(false);
+  const [selectedVehicle, setSelectedVehicle] = useState<any>(null);
   const queryClient = useQueryClient();
 
   const addVehicleMutation = useMutation({
@@ -217,8 +218,8 @@ const VehicleRegistry: React.FC = () => {
                     <td className="px-6 py-4 text-[13px] text-[#76777d]">{v.maxLoadCapacity?.toLocaleString()} kg</td>
                     <td className="px-6 py-4 text-right">
                       <div className="flex justify-end gap-2">
-                        <button className="p-1.5 hover:bg-[#dce9ff] rounded text-[#0058be] transition-colors" title="View Details"><span className="material-symbols-outlined">visibility</span></button>
-                        <button className="p-1.5 hover:bg-[#dce9ff] rounded text-[#76777d] transition-colors"><span className="material-symbols-outlined">more_vert</span></button>
+                        <button onClick={() => setSelectedVehicle(v)} className="p-1.5 hover:bg-[#dce9ff] rounded text-[#0058be] transition-colors cursor-pointer" title="View Details"><span className="material-symbols-outlined">visibility</span></button>
+                        <button onClick={() => setSelectedVehicle(v)} className="p-1.5 hover:bg-[#dce9ff] rounded text-[#76777d] transition-colors cursor-pointer"><span className="material-symbols-outlined">more_vert</span></button>
                       </div>
                     </td>
                   </tr>
@@ -228,6 +229,26 @@ const VehicleRegistry: React.FC = () => {
           </div>
         </div>
 
+        {selectedVehicle && (
+          <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50" onClick={() => setSelectedVehicle(null)}>
+            <div className="bg-white rounded-xl p-8 w-full max-w-md shadow-2xl" onClick={(e) => e.stopPropagation()}>
+              <div className="flex justify-between items-start mb-6">
+                <div>
+                  <h3 className="text-[20px] font-bold text-[#0b1c30]">{selectedVehicle.registrationNumber}</h3>
+                  <p className="text-[13px] text-[#76777d]">{selectedVehicle.name}</p>
+                </div>
+                <button onClick={() => setSelectedVehicle(null)} className="p-1 hover:bg-gray-100 rounded cursor-pointer"><span className="material-symbols-outlined">close</span></button>
+              </div>
+              <div className="space-y-3 text-[14px]">
+                <div className="flex justify-between py-2 border-b border-gray-100"><span className="text-[#76777d]">Type</span><span className="font-semibold text-[#0b1c30]">{selectedVehicle.type}</span></div>
+                <div className="flex justify-between py-2 border-b border-gray-100"><span className="text-[#76777d]">Status</span><span className={statusBadge[selectedVehicle.status] || statusBadge['Available']}>{selectedVehicle.status.toUpperCase()}</span></div>
+                <div className="flex justify-between py-2 border-b border-gray-100"><span className="text-[#76777d]">Odometer</span><span className="font-semibold text-[#0b1c30]">{selectedVehicle.odometer?.toLocaleString()} km</span></div>
+                <div className="flex justify-between py-2 border-b border-gray-100"><span className="text-[#76777d]">Max Load</span><span className="font-semibold text-[#0b1c30]">{selectedVehicle.maxLoadCapacity?.toLocaleString()} kg</span></div>
+                <div className="flex justify-between py-2"><span className="text-[#76777d]">Acquisition Cost</span><span className="font-semibold text-[#0b1c30]">${selectedVehicle.acquisitionCost?.toLocaleString() || 'N/A'}</span></div>
+              </div>
+            </div>
+          </div>
+        )}
         {showAddVehicle && (
           <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50" onClick={() => setShowAddVehicle(false)}>
             <div className="bg-white rounded-xl p-8 w-full max-w-lg shadow-2xl" onClick={(e) => e.stopPropagation()}>

@@ -73,6 +73,7 @@ const DriversPage = () => {
   const [statusFilter, setStatusFilter] = useState('');
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
   const [showAddDriver, setShowAddDriver] = useState(false);
+  const [selectedDriver, setSelectedDriver] = useState<any>(null);
   const queryClient = useQueryClient();
 
   const handleExportCSV = () => {
@@ -143,19 +144,19 @@ const DriversPage = () => {
             <p className="text-label-sm text-outline mt-2">Ready for dispatch</p>
           </div>
           
-          <div className="col-span-12 md:col-span-12 lg:col-span-4 bg-primary-container p-6 rounded-xl border border-outline flex flex-col justify-between overflow-hidden relative">
+          <div className="col-span-12 md:col-span-12 lg:col-span-4 bg-blue-900 p-6 rounded-xl border border-blue-800 flex flex-col justify-between overflow-hidden relative">
             <div className="relative z-10">
-              <p className="text-label-md text-on-primary-container/70 mb-1">AVERAGE SAFETY SCORE</p>
+              <p className="text-[11px] font-bold text-blue-200/70 mb-1">AVERAGE SAFETY SCORE</p>
               <div className="flex items-baseline gap-2">
-                <h2 className="text-headline-lg font-headline-lg text-white">{avgSafety}</h2>
-                <span className="text-on-primary-container/50 text-body-sm">/ 100</span>
+                <h2 className="text-[32px] font-bold text-white">{avgSafety}</h2>
+                <span className="text-blue-200/50 text-[14px]">/ 100</span>
               </div>
             </div>
-            <div className="mt-4 flex gap-1 items-end h-12 relative z-10">
+            <div className="mt-4 flex gap-1.5 items-end h-16 relative z-10">
               {drivers.slice(0, 7).map((d: any, i: number) => (
-                <div key={i} className="w-full rounded-t-sm" style={{
-                  height: `${Math.max(15, (d.safetyScore || 50) * 0.12)}px`,
-                  backgroundColor: `rgba(111, 251, 190, ${(d.safetyScore || 50) / 100})`,
+                <div key={i} className="w-full rounded-t-md transition-all hover:opacity-80" style={{
+                  height: `${Math.max(8, (d.safetyScore || 50) / 100 * 60)}px`,
+                  backgroundColor: d.safetyScore >= 90 ? '#22c55e' : d.safetyScore >= 80 ? '#eab308' : '#ef4444',
                 }}></div>
               ))}
             </div>
@@ -261,7 +262,7 @@ const DriversPage = () => {
                         </p>
                       </td>
                       <td className="px-6 py-4 text-right">
-                        <button className="text-gray-500 hover:text-blue-600 p-1 rounded-lg transition-colors cursor-pointer">
+                        <button onClick={() => setSelectedDriver(d)} className="text-gray-500 hover:text-blue-600 p-1 rounded-lg transition-colors cursor-pointer">
                           <span className="material-symbols-outlined">more_vert</span>
                         </button>
                       </td>
@@ -317,6 +318,30 @@ const DriversPage = () => {
           </div>
           )}
         </section>
+        {selectedDriver && (
+          <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50" onClick={() => setSelectedDriver(null)}>
+            <div className="bg-white rounded-xl p-8 w-full max-w-md shadow-2xl" onClick={(e) => e.stopPropagation()}>
+              <div className="flex justify-between items-start mb-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg">
+                    {selectedDriver.name.split(' ').map((n: string) => n[0]).join('').slice(0, 2).toUpperCase()}
+                  </div>
+                  <div>
+                    <h3 className="text-[20px] font-bold text-[#0b1c30]">{selectedDriver.name}</h3>
+                    <p className="text-[13px] text-gray-500">{selectedDriver.licenseCategory}</p>
+                  </div>
+                </div>
+                <button onClick={() => setSelectedDriver(null)} className="p-1 hover:bg-gray-100 rounded cursor-pointer"><span className="material-symbols-outlined">close</span></button>
+              </div>
+              <div className="space-y-3 text-[14px]">
+                <div className="flex justify-between py-2 border-b border-gray-100"><span className="text-gray-500">License Number</span><span className="font-semibold text-[#0b1c30]">#{selectedDriver.licenseNumber}</span></div>
+                <div className="flex justify-between py-2 border-b border-gray-100"><span className="text-gray-500">Status</span><span className={statusBadge[selectedDriver.status] || statusBadge['Available']}>{selectedDriver.status}</span></div>
+                <div className="flex justify-between py-2 border-b border-gray-100"><span className="text-gray-500">Safety Score</span><span className="font-bold" style={{ color: selectedDriver.safetyScore >= 90 ? '#166534' : selectedDriver.safetyScore >= 80 ? '#92400e' : '#dc2626' }}>{selectedDriver.safetyScore}/100</span></div>
+                <div className="flex justify-between py-2"><span className="text-gray-500">License Expiry</span><span className="font-semibold text-[#0b1c30]">{new Date(selectedDriver.licenseExpiryDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span></div>
+              </div>
+            </div>
+          </div>
+        )}
         {showAddDriver && (
           <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50" onClick={() => setShowAddDriver(false)}>
             <div className="bg-white rounded-xl p-8 w-full max-w-lg shadow-2xl" onClick={(e) => e.stopPropagation()}>
