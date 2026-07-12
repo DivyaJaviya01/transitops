@@ -10,23 +10,26 @@
 }
 
 .kpi-card {
-  background: white;
+  background: var(--bg-secondary);
   border-radius: 8px;
   padding: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
   transition: all 0.3s ease;
-  border-left: 4px solid #3b82f6;
+  border-left: 4px solid var(--accent-brand);
+  border-top: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .kpi-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-md);
 }
 
 .kpi-card h3 {
   margin: 0 0 0.5rem 0;
   font-size: 0.9rem;
-  color: #666;
+  color: var(--text-secondary);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -36,7 +39,7 @@
   margin: 0;
   font-size: 1.8rem;
   font-weight: 700;
-  color: #1f2937;
+  color: var(--text-primary);
 }
 
 .bottom-grid {
@@ -48,16 +51,17 @@
 
 /* Recent Trips Styles */
 .recent-trips-panel {
-  background: white;
+  background: var(--bg-secondary);
   border-radius: 8px;
   padding: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
 }
 
 .recent-trips-panel h3 {
   margin: 0 0 1rem 0;
   font-size: 1.1rem;
-  color: #1f2937;
+  color: var(--text-primary);
   font-weight: 600;
 }
 
@@ -67,37 +71,39 @@
 }
 
 .trips-list thead th {
-  background-color: #f3f4f6;
+  background-color: var(--bg-primary);
   padding: 0.75rem;
   text-align: left;
   font-weight: 600;
   font-size: 0.85rem;
-  color: #666;
-  border-bottom: 2px solid #e5e7eb;
+  color: var(--text-secondary);
+  border-bottom: 2px solid var(--border-color);
 }
 
 .trips-list tbody td {
   padding: 0.75rem;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--border-color);
   font-size: 0.9rem;
+  color: var(--text-primary);
 }
 
 .trips-list tbody tr:hover {
-  background-color: #f9fafb;
+  background-color: var(--bg-primary);
 }
 
 /* Activity Panel Styles */
 .activity-panel {
-  background: white;
+  background: var(--bg-secondary);
   border-radius: 8px;
   padding: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
 }
 
 .activity-panel h3 {
   margin: 0 0 1rem 0;
   font-size: 1.1rem;
-  color: #1f2937;
+  color: var(--text-primary);
   font-weight: 600;
 }
 
@@ -110,7 +116,7 @@
   margin: 0;
   padding: 1rem;
   text-align: center;
-  color: #999;
+  color: var(--text-secondary);
   font-size: 0.9rem;
 }
 
@@ -124,18 +130,18 @@
 }
 
 .status-badge.completed {
-  background-color: #dcfce7;
-  color: #166534;
+  background-color: rgba(35, 134, 54, 0.15);
+  color: var(--accent-success);
 }
 
 .status-badge.in-progress {
-  background-color: #bfdbfe;
-  color: #1e40af;
+  background-color: rgba(138, 60, 255, 0.15);
+  color: var(--accent-brand);
 }
 
 .status-badge.pending {
-  background-color: #fef3c7;
-  color: #92400e;
+  background-color: rgba(210, 153, 34, 0.15);
+  color: var(--accent-warning);
 }
 
 @media (max-width: 1024px) {

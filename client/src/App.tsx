@@ -1,6 +1,15 @@
-import DashboardPage from './features/dashboard/DashboardPage';
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from './context/ThemeContext';
+import AppRoutes from './routes/AppRoutes';
 import './index.css';
 
 export default function App() {
-  return <DashboardPage />;
+  return (
+    <ThemeProvider>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    </ThemeProvider>
+  );
 }
