@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
 import api from '../../services/api';
 import MainLayout from "../../components/layout/MainLayout.tsx";
 import "./Dashboard.css";
@@ -9,6 +10,8 @@ const statusColors: Record<string, string> = {
   "Draft": "status-badge pending",
   "In Progress": "status-badge in-progress",
 };
+
+const CHART_COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4', '#f97316'];
 
 const DashboardPage = () => {
   const { data: kpiData, isLoading: kpiLoading } = useQuery({
@@ -28,9 +31,41 @@ const DashboardPage = () => {
     },
   });
 
+  const { data: vehicles } = useQuery({
+    queryKey: ['vehicles'],
+    queryFn: async () => {
+      const res = await api.get('/vehicles');
+      return res.data;
+    },
+  });
+
   const recentTrips = (trips || [])
     .sort((a: any, b: any) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
     .slice(0, 4);
+
+  const vehicleStatusData = (() => {
+    const counts: Record<string, number> = {};
+    (vehicles || []).forEach((v: any) => {
+      counts[v.status] = (counts[v.status] || 0) + 1;
+    });
+    return Object.entries(counts).map(([name, value]) => ({ name, value }));
+  })();
+
+  const vehicleTypeData = (() => {
+    const counts: Record<string, number> = {};
+    (vehicles || []).forEach((v: any) => {
+      counts[v.type] = (counts[v.type] || 0) + 1;
+    });
+    return Object.entries(counts).map(([name, value]) => ({ name, value }));
+  })();
+
+  const tripsByStatusData = (() => {
+    const counts: Record<string, number> = {};
+    (trips || []).forEach((t: any) => {
+      counts[t.status] = (counts[t.status] || 0) + 1;
+    });
+    return Object.entries(counts).map(([name, value]) => ({ name, value }));
+  })();
 
   const kpiCards = [
     { title: "Active Vehicles", value: kpiData?.activeVehicles ?? "...", icon: "local_shipping", color: "#3b82f6", bg: "#eff6ff", trend: "", positive: true },
@@ -64,7 +99,7 @@ const DashboardPage = () => {
         <div className="dashboard-header">
           <div>
             <h1>Fleet Overview</h1>
-            <p>Welcome back, Fleet Manager 👋 — Here's what's happening today.</p>
+            <p>Welcome back, Fleet Manager — Here's what's happening today.</p>
           </div>
           <div className="dashboard-header-actions">
             <button className="btn-outline">
@@ -98,6 +133,57 @@ const DashboardPage = () => {
               <p className="kpi-value" style={{ color: card.color }}>{card.value}</p>
             </div>
           ))}
+        </div>
+
+        <div className="charts-grid">
+          <div className="chart-card">
+            <h3>Vehicle Status</h3>
+            <ResponsiveContainer width="100%" height={250}>
+              <BarChart data={vehicleStatusData} layout="vertical" margin={{ left: 40, right: 20, top: 10, bottom: 10 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                <XAxis type="number" tick={{ fontSize: 12, fill: '#9ca3af' }} />
+                <YAxis type="category" dataKey="name" tick={{ fontSize: 13, fill: '#6b7280' }} width={90} />
+                <Tooltip contentStyle={{ borderRadius: 8, border: '1px solid #e5e7eb', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
+                <Bar dataKey="value" radius={[0, 6, 6, 0]}>
+                  {vehicleStatusData.map((_, i) => (
+                    <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+
+          <div className="chart-card">
+            <h3>Vehicle Types</h3>
+            <ResponsiveContainer width="100%" height={250}>
+              <PieChart>
+                <Pie data={vehicleTypeData} cx="50%" cy="50%" innerRadius={50} outerRadius={90} dataKey="value" paddingAngle={3}>
+                  {vehicleTypeData.map((_, i) => (
+                    <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip contentStyle={{ borderRadius: 8, border: '1px solid #e5e7eb', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
+                <Legend verticalAlign="bottom" height={30} iconType="circle" iconSize={10} formatter={(v: string) => <span style={{ color: '#6b7280', fontSize: 13 }}>{v}</span>} />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+
+          <div className="chart-card">
+            <h3>Trips by Status</h3>
+            <ResponsiveContainer width="100%" height={250}>
+              <BarChart data={tripsByStatusData} margin={{ left: 10, right: 20, top: 10, bottom: 10 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#9ca3af' }} />
+                <YAxis tick={{ fontSize: 12, fill: '#9ca3af' }} />
+                <Tooltip contentStyle={{ borderRadius: 8, border: '1px solid #e5e7eb', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
+                <Bar dataKey="value" radius={[6, 6, 0, 0]}>
+                  {tripsByStatusData.map((_, i) => (
+                    <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
         </div>
 
         <div className="bottom-grid">
