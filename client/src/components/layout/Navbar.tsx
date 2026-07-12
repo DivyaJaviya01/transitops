@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { FiSearch, FiBell, FiUser, FiChevronDown, FiSun, FiMoon, FiMenu } from 'react-icons/fi';
+import { FiSearch, FiBell, FiUser, FiMail, FiShield, FiChevronDown, FiSun, FiMoon, FiMenu, FiLogOut } from 'react-icons/fi';
 import { useTheme } from '../../context/ThemeContext';
+import { useAuth } from '../../context/AuthContext';
 
 interface NavbarProps {
   onToggleSidebar: () => void;
@@ -9,6 +10,8 @@ interface NavbarProps {
 function Navbar({ onToggleSidebar }: NavbarProps) {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const { user, logout } = useAuth();
+  const initials = user?.name?.split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2) || '?';
 
   return (
     <nav className="navbar">
@@ -52,22 +55,28 @@ function Navbar({ onToggleSidebar }: NavbarProps) {
             className="user-profile"
             onClick={() => setShowUserMenu(!showUserMenu)}
           >
-            <div className="avatar">JM</div>
-            <span className="user-name">John Manager</span>
+            <div className="avatar">{initials}</div>
+            <span className="user-name">{user?.name || 'User'}</span>
             <FiChevronDown size={18} />
           </button>
 
           {showUserMenu && (
             <div className="user-dropdown">
-              <a href="#" className="dropdown-item">
-                <FiUser size={16} />
-                Profile
-              </a>
-              <a href="#" className="dropdown-item">
-                Settings
-              </a>
+              <div className="dropdown-header">
+                <div className="dropdown-avatar">{initials}</div>
+                <div>
+                  <p className="dropdown-name">{user?.name}</p>
+                  <p className="dropdown-email">{user?.email}</p>
+                </div>
+              </div>
               <hr className="dropdown-divider" />
-              <a href="#" className="dropdown-item logout">
+              <div className="dropdown-item" style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                <FiShield size={16} />
+                {user?.role}
+              </div>
+              <hr className="dropdown-divider" />
+              <a href="#" className="dropdown-item" onClick={(e) => { e.preventDefault(); logout(); }}>
+                <FiLogOut size={16} />
                 Logout
               </a>
             </div>
