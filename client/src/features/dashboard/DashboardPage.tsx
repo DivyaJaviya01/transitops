@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import api from '../../services/api';
 import MainLayout from "../../components/layout/MainLayout.tsx";
 import "./Dashboard.css";
@@ -135,49 +135,20 @@ const DashboardPage = () => {
           ))}
         </div>
 
-        <div className="charts-grid">
-          <div className="chart-card">
-            <h3>Vehicle Status</h3>
-            <ResponsiveContainer width="100%" height={250}>
-              <BarChart data={vehicleStatusData} layout="vertical" margin={{ left: 40, right: 20, top: 10, bottom: 10 }}>
+        <div className="chart-section">
+          <div className="chart-card wide">
+            <div className="chart-card-header">
+              <h3>Vehicle Status Distribution</h3>
+              <span className="chart-subtitle">Current fleet breakdown</span>
+            </div>
+            <ResponsiveContainer width="100%" height={220}>
+              <BarChart data={vehicleStatusData} layout="vertical" margin={{ left: 50, right: 30, top: 5, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                 <XAxis type="number" tick={{ fontSize: 12, fill: '#9ca3af' }} />
-                <YAxis type="category" dataKey="name" tick={{ fontSize: 13, fill: '#6b7280' }} width={90} />
+                <YAxis type="category" dataKey="name" tick={{ fontSize: 13, fill: '#6b7280' }} width={100} />
                 <Tooltip contentStyle={{ borderRadius: 8, border: '1px solid #e5e7eb', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
                 <Bar dataKey="value" radius={[0, 6, 6, 0]}>
                   {vehicleStatusData.map((_, i) => (
-                    <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-
-          <div className="chart-card">
-            <h3>Vehicle Types</h3>
-            <ResponsiveContainer width="100%" height={250}>
-              <PieChart>
-                <Pie data={vehicleTypeData} cx="50%" cy="50%" innerRadius={50} outerRadius={90} dataKey="value" paddingAngle={3}>
-                  {vehicleTypeData.map((_, i) => (
-                    <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip contentStyle={{ borderRadius: 8, border: '1px solid #e5e7eb', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
-                <Legend verticalAlign="bottom" height={30} iconType="circle" iconSize={10} formatter={(v: string) => <span style={{ color: '#6b7280', fontSize: 13 }}>{v}</span>} />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-
-          <div className="chart-card">
-            <h3>Trips by Status</h3>
-            <ResponsiveContainer width="100%" height={250}>
-              <BarChart data={tripsByStatusData} margin={{ left: 10, right: 20, top: 10, bottom: 10 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#9ca3af' }} />
-                <YAxis tick={{ fontSize: 12, fill: '#9ca3af' }} />
-                <Tooltip contentStyle={{ borderRadius: 8, border: '1px solid #e5e7eb', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
-                <Bar dataKey="value" radius={[6, 6, 0, 0]}>
-                  {tripsByStatusData.map((_, i) => (
                     <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
                   ))}
                 </Bar>
