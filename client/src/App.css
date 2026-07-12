@@ -1,0 +1,54 @@
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #0d1117;
+  color: #c9d1d9;
+  font-family: 'Inter', sans-serif;
+}
+
+.app-header {
+  padding: 2rem;
+  background-color: #161b22;
+  border-bottom: 1px solid #30363d;
+  text-align: center;
+}
+
+.app-header h1 {
+  margin: 0;
+  color: #58a6ff;
+  font-size: 2.5rem;
+}
+
+.app-header p {
+  margin: 0.5rem 0 0 0;
+  color: #8b949e;
+  font-size: 1.1rem;
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.welcome-card {
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 3rem;
+  text-align: center;
+  max-width: 500px;
+}
+
+.welcome-card h2 {
+  margin-top: 0;
+  color: #58a6ff;
+}
+
+.welcome-card p {
+  color: #8b949e;
+  line-height: 1.5;
+}
