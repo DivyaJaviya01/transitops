@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts';
 import api from '../../services/api';
@@ -12,6 +13,7 @@ const statusColors: Record<string, string> = {
 };
 
 const DashboardPage = () => {
+  const navigate = useNavigate();
   const { data: kpiData, isLoading: kpiLoading } = useQuery({
     queryKey: ['kpis'],
     queryFn: async () => {
@@ -94,11 +96,11 @@ const DashboardPage = () => {
             <p>Welcome back, Fleet Manager — Here's what's happening today.</p>
           </div>
           <div className="dashboard-header-actions">
-            <button className="btn-outline">
+            <button onClick={() => navigate('/reports')} className="btn-outline">
               <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>file_download</span>
               Export
             </button>
-            <button className="btn-primary">
+            <button onClick={() => navigate('/trips')} className="btn-primary">
               <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>add</span>
               New Trip
             </button>
@@ -165,7 +167,7 @@ const DashboardPage = () => {
                 <span className="material-symbols-outlined text-blue-500" style={{ color: "#3b82f6" }}>route</span>
                 Recent Trips
               </h3>
-              <a href="#" className="view-all-link">View All →</a>
+              <a href="/trips" className="view-all-link" onClick={(e) => { e.preventDefault(); navigate('/trips'); }}>View All →</a>
             </div>
             <div className="trips-list">
               <table>
