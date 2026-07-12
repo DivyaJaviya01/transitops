@@ -194,7 +194,7 @@ const DriversPage = () => {
               </div>
             </div>
             <div className="flex flex-wrap items-center gap-3 w-full md:w-auto mt-2 md:mt-0">
-              <button onClick={() => setShowAddDriver(true)} className="bg-blue-600 text-white px-4 py-2 rounded-lg text-[12px] font-bold flex items-center gap-2 hover:bg-blue-700 transition-all shadow-sm cursor-pointer">
+              <button onClick={() => setShowAddDriver(true)} className="bg-[var(--accent-brand)] text-white px-4 py-2.5 rounded-lg text-[12px] font-semibold flex items-center gap-2 hover:opacity-90 active:opacity-80 transition-all shadow-sm cursor-pointer">
                 <span className="material-symbols-outlined text-[18px]">person_add</span>
                 ADD DRIVER
               </button>

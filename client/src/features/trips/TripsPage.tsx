@@ -215,8 +215,7 @@ const TripsPage = () => {
           </div>
           <button
             onClick={() => setShowModal(true)}
-            className="login-button"
-            style={{ width: 'auto', display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: 0 }}
+            className="bg-[var(--accent-brand)] text-white px-4 py-2.5 rounded-lg text-[12px] font-semibold flex items-center gap-2 hover:opacity-90 active:opacity-80 transition-all shadow-sm"
           >
             <FiPlus /> New Trip
           </button>
