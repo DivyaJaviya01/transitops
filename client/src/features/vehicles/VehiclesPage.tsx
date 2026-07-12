@@ -84,6 +84,11 @@ const VehicleRegistry: React.FC = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['vehicles'] });
+      queryClient.invalidateQueries({ queryKey: ['kpis'] });
+      queryClient.invalidateQueries({ queryKey: ['available-vehicles'] });
+      queryClient.invalidateQueries({ queryKey: ['vehicles-expense-options'] });
+      queryClient.invalidateQueries({ queryKey: ['vehicles-maintenance-options'] });
+      queryClient.invalidateQueries({ queryKey: ['vehicles-report'] });
       setShowAddVehicle(false);
     },
   });

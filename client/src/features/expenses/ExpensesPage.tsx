@@ -86,6 +86,8 @@ const ExpensesPage = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['expenses'] });
       queryClient.invalidateQueries({ queryKey: ['operational-cost'] });
+      queryClient.invalidateQueries({ queryKey: ['kpis'] });
+      queryClient.invalidateQueries({ queryKey: ['vehicle-analytics'] });
       toast.success('Fuel purchase log created successfully!');
       setShowFuelModal(false);
       setFuelForm({ vehicleId: '', liters: '', cost: '', date: '' });
@@ -102,6 +104,8 @@ const ExpensesPage = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['expenses'] });
       queryClient.invalidateQueries({ queryKey: ['operational-cost'] });
+      queryClient.invalidateQueries({ queryKey: ['kpis'] });
+      queryClient.invalidateQueries({ queryKey: ['vehicle-analytics'] });
       toast.success('Operational expense recorded successfully!');
       setShowExpenseModal(false);
       setExpenseForm({ vehicleId: '', amount: '', category: 'Other', description: '', date: '' });

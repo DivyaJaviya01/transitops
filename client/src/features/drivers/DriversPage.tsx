@@ -88,6 +88,8 @@ const DriversPage = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['drivers'] });
+      queryClient.invalidateQueries({ queryKey: ['kpis'] });
+      queryClient.invalidateQueries({ queryKey: ['available-drivers'] });
       setShowAddDriver(false);
     },
   });
