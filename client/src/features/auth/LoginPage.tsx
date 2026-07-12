@@ -33,7 +33,7 @@ const LoginPage = () => {
     <div className="login-page">
       <div className="login-left">
         <div className="login-left-center">
-          <img src="/image.png" alt="TransitOps" width="60" height="60" style={{ borderRadius: '14px' }} />
+          <img src="/image.png" alt="TransitOps" width="100" height="100" style={{ borderRadius: '14px' }} />
           <div className="login-brand">
             <h1>TransitOps</h1>
             <p>Smart Transport Operations Platform</p>
