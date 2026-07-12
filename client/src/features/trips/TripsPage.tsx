@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Toaster, toast } from 'sonner';
-import { FiPlus, FiNavigation, FiX, FiCheck, FiSend } from 'react-icons/fi';
+import { FiPlus, FiNavigation, FiX, FiCheck, FiSend, FiTrash2 } from 'react-icons/fi';
 import api from '../../services/api';
 import MainLayout from '../../components/layout/MainLayout';
 
@@ -165,6 +165,20 @@ const TripsPage = () => {
     },
     onError: (err: any) => {
       toast.error(err.response?.data?.error || 'Cancellation failed');
+    }
+  });
+
+  const deleteTripMutation = useMutation({
+    mutationFn: async (id: string) => {
+      await api.delete(`/trips/${id}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['trips'] });
+      queryClient.invalidateQueries({ queryKey: ['kpis'] });
+      toast.success('Trip deleted');
+    },
+    onError: (err: any) => {
+      toast.error(err.response?.data?.error || 'Delete failed');
     }
   });
 
@@ -441,7 +455,7 @@ const TripsPage = () => {
                         <td>{t.driver.name}</td>
                         <td>{getStatusBadge(t.status)}</td>
                         <td>
-                          <div style={{ display: 'flex', gap: '0.5rem' }}>
+                          <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
                             {t.status === 'Draft' && (
                               <button
                                 onClick={() => dispatchMutation.mutate(t.id)}
@@ -477,6 +491,15 @@ const TripsPage = () => {
                                 title="Cancel Trip"
                               >
                                 <FiX size={12} /> Cancel
+                              </button>
+                            )}
+                            {t.status === 'Draft' && (
+                              <button
+                                onClick={() => { if (window.confirm('Delete this trip?')) deleteTripMutation.mutate(t.id); }}
+                                style={{ border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem', padding: '4px 8px', borderRadius: '6px', color: 'var(--accent-danger)', backgroundColor: 'rgba(248,81,73,0.15)' }}
+                                title="Delete Trip"
+                              >
+                                <FiTrash2 size={12} /> Delete
                               </button>
                             )}
                           </div>

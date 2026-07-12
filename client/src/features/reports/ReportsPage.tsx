@@ -59,8 +59,7 @@ const ReportsPage = () => {
           </div>
           <button
             onClick={handleExportCSV}
-            className="login-button"
-            style={{ width: 'auto', display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: 0 }}
+            className="text-[13px] font-bold text-gray-500 dark:text-[var(--text-secondary)] flex items-center gap-1 hover:bg-gray-100 dark:hover:bg-[var(--table-row-hover)] px-3 py-2 rounded-lg transition-colors border border-gray-200 dark:border-[var(--card-border)] cursor-pointer"
           >
             <FiDownload /> Export Fleet CSV
           </button>

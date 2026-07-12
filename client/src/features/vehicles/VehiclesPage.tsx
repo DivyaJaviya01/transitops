@@ -93,6 +93,16 @@ const VehicleRegistry: React.FC = () => {
     },
   });
 
+  const deleteVehicleMutation = useMutation({
+    mutationFn: async (regNo: string) => {
+      await api.delete(`/vehicles/${regNo}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['vehicles'] });
+      queryClient.invalidateQueries({ queryKey: ['kpis'] });
+    },
+  });
+
   const { data: vehicles, isLoading } = useQuery({
     queryKey: ['vehicles', statusFilter, typeFilter],
     queryFn: async () => {
@@ -224,7 +234,7 @@ const VehicleRegistry: React.FC = () => {
                     <td className="px-6 py-4 text-right">
                       <div className="flex justify-end gap-2">
                         <button onClick={() => setSelectedVehicle(v)} className="p-1.5 hover:bg-[var(--table-row-hover)] rounded text-[var(--accent-brand)] transition-colors cursor-pointer" title="View Details"><span className="material-symbols-outlined">visibility</span></button>
-                        <button onClick={() => setSelectedVehicle(v)} className="p-1.5 hover:bg-[var(--table-row-hover)] rounded text-[var(--text-secondary)] transition-colors cursor-pointer"><span className="material-symbols-outlined">more_vert</span></button>
+                        <button onClick={() => { if (window.confirm('Delete this vehicle?')) deleteVehicleMutation.mutate(v.registrationNumber); }} className="p-1.5 hover:bg-red-50 dark:hover:bg-red-900/20 rounded text-red-500 transition-colors cursor-pointer" title="Delete"><span className="material-symbols-outlined">delete</span></button>
                       </div>
                     </td>
                   </tr>

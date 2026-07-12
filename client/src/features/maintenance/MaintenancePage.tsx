@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Toaster, toast } from 'sonner';
-import { FiPlus, FiTool, FiCheck } from 'react-icons/fi';
+import { FiPlus, FiTool, FiCheck, FiTrash2 } from 'react-icons/fi';
 import api from '../../services/api';
 import MainLayout from '../../components/layout/MainLayout';
 
@@ -93,6 +93,22 @@ const MaintenancePage = () => {
     },
     onError: (err: any) => {
       toast.error(err.response?.data?.error || 'Failed to close log');
+    }
+  });
+
+  const deleteMaintenanceMutation = useMutation({
+    mutationFn: async (id: string) => {
+      await api.delete(`/maintenance/${id}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['maintenance-logs'] });
+      queryClient.invalidateQueries({ queryKey: ['vehicles'] });
+      queryClient.invalidateQueries({ queryKey: ['kpis'] });
+      queryClient.invalidateQueries({ queryKey: ['available-vehicles'] });
+      toast.success('Maintenance entry deleted');
+    },
+    onError: (err: any) => {
+      toast.error(err.response?.data?.error || 'Delete failed');
     }
   });
 
@@ -282,16 +298,27 @@ const MaintenancePage = () => {
                           )}
                         </td>
                         <td>
-                          {log.status === 'Active' && (
-                            <button
-                              onClick={() => closeMutation.mutate(log.id)}
-                              className="status-badge completed"
-                              style={{ border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem' }}
-                              title="Complete Maintenance"
-                            >
-                              <FiCheck size={12} /> Close
-                            </button>
-                          )}
+                          <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                            {log.status === 'Active' && (
+                              <>
+                                <button
+                                  onClick={() => closeMutation.mutate(log.id)}
+                                  className="status-badge completed"
+                                  style={{ border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem' }}
+                                  title="Complete Maintenance"
+                                >
+                                  <FiCheck size={12} /> Close
+                                </button>
+                                <button
+                                  onClick={() => { if (window.confirm('Delete this maintenance entry?')) deleteMaintenanceMutation.mutate(log.id); }}
+                                  style={{ border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem', padding: '4px 8px', borderRadius: '6px', color: 'var(--accent-danger)', backgroundColor: 'rgba(248,81,73,0.15)' }}
+                                  title="Delete Maintenance"
+                                >
+                                  <FiTrash2 size={12} /> Delete
+                                </button>
+                              </>
+                            )}
+                          </div>
                         </td>
                       </tr>
                     ))}

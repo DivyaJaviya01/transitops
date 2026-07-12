@@ -65,6 +65,50 @@ export async function getExpenses(req, res, next) {
   }
 }
 
+export async function deleteFuelLog(req, res, next) {
+  try {
+    const { id } = req.params;
+
+    const log = await prisma.fuelLog.findUnique({
+      where: { id }
+    });
+
+    if (!log) {
+      return res.status(404).json({ error: 'Fuel log not found' });
+    }
+
+    await prisma.fuelLog.delete({
+      where: { id }
+    });
+
+    res.status(200).json({ message: 'Fuel log deleted successfully' });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function deleteExpense(req, res, next) {
+  try {
+    const { id } = req.params;
+
+    const expense = await prisma.expense.findUnique({
+      where: { id }
+    });
+
+    if (!expense) {
+      return res.status(404).json({ error: 'Expense not found' });
+    }
+
+    await prisma.expense.delete({
+      where: { id }
+    });
+
+    res.status(200).json({ message: 'Expense deleted successfully' });
+  } catch (error) {
+    next(error);
+  }
+}
+
 export async function getOperationalCost(req, res, next) {
   try {
     const { vehicleId } = req.params;
