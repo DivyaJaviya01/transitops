@@ -96,7 +96,7 @@ const DashboardPage = () => {
             <p>Welcome back, Fleet Manager — Here's what's happening today.</p>
           </div>
           <div className="dashboard-header-actions">
-            <button onClick={() => navigate('/reports')} className="btn-outline">
+            <button onClick={() => navigate('/reports')} className="text-[13px] font-bold text-gray-500 dark:text-[var(--text-secondary)] flex items-center gap-1 hover:bg-gray-100 dark:hover:bg-[var(--table-row-hover)] px-3 py-2 rounded-lg transition-colors border border-gray-200 dark:border-[var(--card-border)] cursor-pointer">
               <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>file_download</span>
               Export
             </button>

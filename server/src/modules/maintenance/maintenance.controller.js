@@ -100,6 +100,43 @@ export async function closeMaintenance(req, res, next) {
   }
 }
 
+export async function deleteMaintenance(req, res, next) {
+  try {
+    const { id } = req.params;
+
+    const log = await prisma.maintenanceLog.findUnique({
+      where: { id },
+      include: { vehicle: true }
+    });
+
+    if (!log) {
+      return res.status(404).json({ error: 'Maintenance log not found' });
+    }
+
+    if (log.status !== 'Active') {
+      return res.status(400).json({ error: 'Only Active maintenance can be deleted' });
+    }
+
+    await prisma.$transaction(async (tx) => {
+      // Revert vehicle back to Available (unless retired)
+      if (log.vehicle.status !== 'Retired') {
+        await tx.vehicle.update({
+          where: { registrationNumber: log.vehicleId },
+          data: { status: 'Available' }
+        });
+      }
+
+      await tx.maintenanceLog.delete({
+        where: { id }
+      });
+    });
+
+    res.status(200).json({ message: 'Maintenance log deleted successfully' });
+  } catch (error) {
+    next(error);
+  }
+}
+
 export async function getMaintenanceLogs(req, res, next) {
   try {
     const logs = await prisma.maintenanceLog.findMany({

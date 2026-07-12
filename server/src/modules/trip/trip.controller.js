@@ -216,6 +216,32 @@ export async function cancelTrip(req, res, next) {
   }
 }
 
+export async function deleteTrip(req, res, next) {
+  try {
+    const { id } = req.params;
+
+    const trip = await prisma.trip.findUnique({
+      where: { id }
+    });
+
+    if (!trip) {
+      return res.status(404).json({ error: 'Trip not found' });
+    }
+
+    if (trip.status !== 'Draft') {
+      return res.status(400).json({ error: 'Only Draft trips can be deleted' });
+    }
+
+    await prisma.trip.delete({
+      where: { id }
+    });
+
+    res.status(200).json({ message: 'Trip deleted successfully' });
+  } catch (error) {
+    next(error);
+  }
+}
+
 export async function getTrips(req, res, next) {
   try {
     const { status } = req.query;

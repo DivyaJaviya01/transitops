@@ -94,6 +94,17 @@ const DriversPage = () => {
     },
   });
 
+  const deleteDriverMutation = useMutation({
+    mutationFn: async (id: string) => {
+      await api.delete(`/drivers/${id}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['drivers'] });
+      queryClient.invalidateQueries({ queryKey: ['kpis'] });
+      queryClient.invalidateQueries({ queryKey: ['available-drivers'] });
+    },
+  });
+
   const { data: allDrivers, isLoading } = useQuery({
     queryKey: ['drivers', statusFilter],
     queryFn: async () => {
@@ -194,7 +205,7 @@ const DriversPage = () => {
               </div>
             </div>
             <div className="flex flex-wrap items-center gap-3 w-full md:w-auto mt-2 md:mt-0">
-              <button onClick={() => setShowAddDriver(true)} className="bg-blue-600 text-white px-4 py-2 rounded-lg text-[12px] font-bold flex items-center gap-2 hover:bg-blue-700 transition-all shadow-sm cursor-pointer">
+              <button onClick={() => setShowAddDriver(true)} className="bg-[var(--accent-brand)] text-white px-4 py-2.5 rounded-lg text-[12px] font-semibold flex items-center gap-2 hover:opacity-90 active:opacity-80 transition-all shadow-sm cursor-pointer">
                 <span className="material-symbols-outlined text-[18px]">person_add</span>
                 ADD DRIVER
               </button>
@@ -264,9 +275,10 @@ const DriversPage = () => {
                         </p>
                       </td>
                       <td className="px-6 py-4 text-right">
-                        <button onClick={() => setSelectedDriver(d)} className="text-gray-500 dark:text-[var(--text-secondary)] hover:text-blue-600 dark:hover:text-blue-400 p-1 rounded-lg transition-colors cursor-pointer">
-                          <span className="material-symbols-outlined">more_vert</span>
-                        </button>
+                        <div className="flex justify-end gap-2">
+                          <button onClick={() => setSelectedDriver(d)} className="p-1.5 hover:bg-[var(--table-row-hover)] rounded text-[var(--accent-brand)] transition-colors cursor-pointer" title="View Details"><span className="material-symbols-outlined">visibility</span></button>
+                          <button onClick={() => { if (window.confirm('Delete this driver?')) deleteDriverMutation.mutate(d.id); }} className="p-1.5 hover:bg-red-50 dark:hover:bg-red-900/20 rounded text-red-500 transition-colors cursor-pointer" title="Delete"><span className="material-symbols-outlined">delete</span></button>
+                        </div>
                       </td>
                     </tr>
                   );

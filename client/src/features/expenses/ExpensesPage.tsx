@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Toaster, toast } from 'sonner';
-import { FiPlus, FiDollarSign } from 'react-icons/fi';
+import { FiPlus, FiDollarSign, FiTrash2 } from 'react-icons/fi';
 import api from '../../services/api';
 import MainLayout from '../../components/layout/MainLayout';
 
@@ -106,12 +106,31 @@ const ExpensesPage = () => {
       queryClient.invalidateQueries({ queryKey: ['operational-cost'] });
       queryClient.invalidateQueries({ queryKey: ['kpis'] });
       queryClient.invalidateQueries({ queryKey: ['vehicle-analytics'] });
-      toast.success('Operational expense recorded successfully!');
+      toast.success('Expense logged successfully!');
       setShowExpenseModal(false);
       setExpenseForm({ vehicleId: '', amount: '', category: 'Other', description: '', date: '' });
     },
     onError: (err: any) => {
       toast.error(err.response?.data?.error || 'Failed to log expense');
+    }
+  });
+
+  const deleteExpenseMutation = useMutation({
+    mutationFn: async (expense: any) => {
+      if (expense.liters !== undefined) {
+        await api.delete(`/expenses/fuel/${expense.id}`);
+      } else {
+        await api.delete(`/expenses/other/${expense.id}`);
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['expenses'] });
+      queryClient.invalidateQueries({ queryKey: ['operational-cost'] });
+      queryClient.invalidateQueries({ queryKey: ['kpis'] });
+      toast.success('Entry deleted');
+    },
+    onError: (err: any) => {
+      toast.error(err.response?.data?.error || 'Delete failed');
     }
   });
 
@@ -145,15 +164,13 @@ const ExpensesPage = () => {
           <div style={{ display: 'flex', gap: '1rem' }}>
             <button
               onClick={() => setShowFuelModal(true)}
-              className="login-button"
-              style={{ width: 'auto', display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: 0 }}
+              className="bg-[var(--accent-brand)] text-white px-4 py-2.5 rounded-lg text-[12px] font-semibold flex items-center gap-2 hover:opacity-90 active:opacity-80 transition-all shadow-sm"
             >
               <FiPlus /> Log Fuel Purchase
             </button>
             <button
               onClick={() => setShowExpenseModal(true)}
-              className="login-button"
-              style={{ width: 'auto', display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: 0, backgroundColor: 'transparent', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}
+              className="bg-[var(--accent-brand)] text-white px-4 py-2.5 rounded-lg text-[12px] font-semibold flex items-center gap-2 hover:opacity-90 active:opacity-80 transition-all shadow-sm"
             >
               <FiPlus /> Record Expense
             </button>
@@ -395,6 +412,7 @@ const ExpensesPage = () => {
                       <th>Description</th>
                       <th>Date</th>
                       <th>Cost Amount</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -406,6 +424,15 @@ const ExpensesPage = () => {
                         <td>{new Date(expense.date).toLocaleDateString()}</td>
                         <td style={{ fontWeight: 700, color: 'var(--accent-danger)' }}>
                           -${expense.amount.toLocaleString()}
+                        </td>
+                        <td>
+                          <button
+                            onClick={() => { if (window.confirm('Delete this entry?')) deleteExpenseMutation.mutate(expense); }}
+                            style={{ border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem', padding: '4px 8px', borderRadius: '6px', color: 'var(--accent-danger)', backgroundColor: 'rgba(248,81,73,0.15)' }}
+                            title="Delete"
+                          >
+                            <FiTrash2 size={12} /> Delete
+                          </button>
                         </td>
                       </tr>
                     ))}
