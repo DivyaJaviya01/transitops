@@ -106,6 +106,7 @@ async function main() {
 
   for (let i = 0; i < tripData.length; i++) {
     const t = tripData[i];
+    const createdAt = t.dispatchedAt || t.completedAt || t.cancelledAt || new Date('2026-07-10');
     const trip = await prisma.trip.create({
       data: {
         source: t.source,
@@ -120,6 +121,7 @@ async function main() {
         cancelledAt: t.cancelledAt || null,
         actualDistance: t.actualDistance || null,
         fuelConsumed: t.fuelConsumed || null,
+        createdAt,
       }
     });
 
