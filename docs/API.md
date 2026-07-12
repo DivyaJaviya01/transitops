@@ -1,3 +1,3 @@
-# API Specification
+# API Design
 
-(Place API design and routes here)
+The API will expose endpoints for authentication, vehicles, drivers, trips, maintenance, expenses, and reports.
