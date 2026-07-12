@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FiHome, FiTruck, FiUsers, FiNavigation, FiDollarSign, FiTool, FiFileText, FiSettings, FiLogOut } from 'react-icons/fi';
+import { FiHome, FiTruck, FiUsers, FiNavigation, FiDollarSign, FiTool, FiFileText, FiLogOut } from 'react-icons/fi';
 import { useAuth } from '../../context/AuthContext';
 
 interface MenuItem {
@@ -39,9 +39,9 @@ function Sidebar({ isCollapsed }: SidebarProps) {
   return (
     <aside className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
       <div className="sidebar-header">
-        <div className="sidebar-logo">
+          <div className="sidebar-logo">
           <div className="logo-icon">
-            <FiTruck size={32} />
+            <img src="/image.png" alt="TransitOps" className="sidebar-logo-img" />
           </div>
           {!isCollapsed && (
             <div className="logo-text">
@@ -76,10 +76,6 @@ function Sidebar({ isCollapsed }: SidebarProps) {
       <div className="sidebar-section">
         {!isCollapsed && <h3 className="section-title">SETTINGS</h3>}
         <div className="sidebar-footer-menu">
-          <div className="menu-item settings" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
-            <span className="menu-icon"><FiSettings size={20} /></span>
-            {!isCollapsed && <span className="menu-label">Settings</span>}
-          </div>
           <div className="menu-item logout" onClick={() => logout()} style={{ cursor: 'pointer' }}>
             <span className="menu-icon"><FiLogOut size={20} /></span>
             {!isCollapsed && <span className="menu-label">Logout</span>}

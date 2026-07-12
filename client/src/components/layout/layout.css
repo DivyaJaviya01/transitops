@@ -96,13 +96,18 @@
   width: 48px;
   height: 48px;
   border-radius: 10px;
-  background: linear-gradient(135deg, var(--accent-brand) 0%, var(--accent-brand) 100%);
-  color: white;
+  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(138, 60, 255, 0.3);
+  overflow: hidden;
+}
+
+.sidebar-logo-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
 }
 
 .logo-text {
