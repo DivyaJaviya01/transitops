@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts';
 import api from '../../services/api';
 import MainLayout from "../../components/layout/MainLayout.tsx";
 import "./Dashboard.css";
@@ -10,8 +10,6 @@ const statusColors: Record<string, string> = {
   "Draft": "status-badge pending",
   "In Progress": "status-badge in-progress",
 };
-
-const CHART_COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4', '#f97316'];
 
 const DashboardPage = () => {
   const { data: kpiData, isLoading: kpiLoading } = useQuery({
@@ -43,28 +41,22 @@ const DashboardPage = () => {
     .sort((a: any, b: any) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
     .slice(0, 4);
 
-  const vehicleStatusData = (() => {
-    const counts: Record<string, number> = {};
-    (vehicles || []).forEach((v: any) => {
-      counts[v.status] = (counts[v.status] || 0) + 1;
-    });
-    return Object.entries(counts).map(([name, value]) => ({ name, value }));
-  })();
-
-  const vehicleTypeData = (() => {
-    const counts: Record<string, number> = {};
-    (vehicles || []).forEach((v: any) => {
-      counts[v.type] = (counts[v.type] || 0) + 1;
-    });
-    return Object.entries(counts).map(([name, value]) => ({ name, value }));
-  })();
-
-  const tripsByStatusData = (() => {
+  const tripsByDayData = (() => {
+    const days: string[] = [];
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date();
+      d.setDate(d.getDate() - i);
+      days.push(d.toISOString().slice(0, 10));
+    }
     const counts: Record<string, number> = {};
     (trips || []).forEach((t: any) => {
-      counts[t.status] = (counts[t.status] || 0) + 1;
+      const day = new Date(t.createdAt).toISOString().slice(0, 10);
+      if (days.includes(day)) counts[day] = (counts[day] || 0) + 1;
     });
-    return Object.entries(counts).map(([name, value]) => ({ name, value }));
+    return days.map(d => ({
+      day: new Date(d).toLocaleDateString('en', { weekday: 'short', month: 'short', day: 'numeric' }),
+      trips: counts[d] || 0,
+    }));
   })();
 
   const kpiCards = [
@@ -135,26 +127,35 @@ const DashboardPage = () => {
           ))}
         </div>
 
-        <div className="chart-section">
-          <div className="chart-card wide">
-            <div className="chart-card-header">
-              <h3>Vehicle Status Distribution</h3>
-              <span className="chart-subtitle">Current fleet breakdown</span>
+        <div className="graph-card">
+          <div className="graph-header">
+            <h3>
+              <span className="material-symbols-outlined" style={{ color: '#3b82f6', fontSize: 20 }}>trending_up</span>
+              Trip Activity — Last 7 Days
+            </h3>
+            <div className="graph-legend">
+              <span className="legend-dot" style={{ background: '#3b82f6' }}></span>
+              Trips
             </div>
-            <ResponsiveContainer width="100%" height={220}>
-              <BarChart data={vehicleStatusData} layout="vertical" margin={{ left: 50, right: 30, top: 5, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis type="number" tick={{ fontSize: 12, fill: '#9ca3af' }} />
-                <YAxis type="category" dataKey="name" tick={{ fontSize: 13, fill: '#6b7280' }} width={100} />
-                <Tooltip contentStyle={{ borderRadius: 8, border: '1px solid #e5e7eb', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
-                <Bar dataKey="value" radius={[0, 6, 6, 0]}>
-                  {vehicleStatusData.map((_, i) => (
-                    <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
           </div>
+          <ResponsiveContainer width="100%" height={280}>
+            <AreaChart data={tripsByDayData} margin={{ left: 0, right: 20, top: 10, bottom: 5 }}>
+              <defs>
+                <linearGradient id="tripGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#3b82f6" stopOpacity={0.3} />
+                  <stop offset="100%" stopColor="#3b82f6" stopOpacity={0.02} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" vertical={false} />
+              <XAxis dataKey="day" tick={{ fontSize: 12, fill: '#9ca3af' }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fontSize: 12, fill: '#9ca3af' }} axisLine={false} tickLine={false} allowDecimals={false} />
+              <Tooltip
+                contentStyle={{ borderRadius: 10, border: '1px solid #e5e7eb', boxShadow: '0 4px 16px rgba(0,0,0,0.1)' }}
+                labelStyle={{ fontWeight: 600, color: '#111827' }}
+              />
+              <Area type="monotone" dataKey="trips" stroke="#3b82f6" strokeWidth={3} fill="url(#tripGradient)" dot={{ fill: '#3b82f6', stroke: '#fff', strokeWidth: 2, r: 5 }} activeDot={{ r: 7, fill: '#3b82f6', stroke: '#fff', strokeWidth: 2 }} />
+            </AreaChart>
+          </ResponsiveContainer>
         </div>
 
         <div className="bottom-grid">

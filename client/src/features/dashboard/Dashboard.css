@@ -301,39 +301,44 @@
 }
 
 @media (max-width: 1024px) {
-.chart-section {
+.graph-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+  border: 1px solid #f3f4f6;
   margin-bottom: 2rem;
 }
 
-.chart-card {
-  background: white;
-  border-radius: 12px;
-  padding: 1.25rem;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
-  border: 1px solid #f3f4f6;
-}
-
-.chart-card.wide {
-  max-width: 600px;
-}
-
-.chart-card-header {
+.graph-header {
   display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 0.5rem;
 }
 
-.chart-card-header h3 {
+.graph-header h3 {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 600;
   color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.chart-subtitle {
-  font-size: 0.78rem;
+.graph-legend {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
   color: #9ca3af;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
 }
 
 .bottom-grid {
