@@ -16,7 +16,7 @@ const LoginPage = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#0a1931',
+        background: '#545a63ff',
         padding: '24px',
         fontFamily: 'Arial, sans-serif',
       }}
