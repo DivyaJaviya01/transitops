@@ -18,6 +18,7 @@ hackathon/
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Node.js (v18+)
 - npm or yarn
 
@@ -42,6 +43,7 @@ npm run dev
 ## 📋 Features
 
 ### Dashboard
+
 - **KPI Cards** - Real-time fleet metrics
   - Active Vehicles
   - Available Vehicles
@@ -55,10 +57,10 @@ npm run dev
 - **Recent Activity** - Activity log and notifications
 
 ### Navigation
+
 - **Sidebar** - Professional navigation menu with sections:
   - Main Menu (Dashboard, Vehicles, Drivers, Trips, Expenses, Maintenance, Reports)
   - Settings (Settings, Logout)
-  
 - **Navbar** - Top navigation with:
   - Search functionality
   - Notifications (3 pending)
@@ -67,6 +69,7 @@ npm run dev
 ## 🛠️ Tech Stack
 
 ### Frontend
+
 - React 18.2
 - TypeScript 5.2
 - Vite 5.0
@@ -75,6 +78,7 @@ npm run dev
 - CSS3 (with responsive design)
 
 ### Backend (Planned)
+
 - Node.js/Express
 - Prisma ORM
 - PostgreSQL/MySQL
@@ -92,6 +96,7 @@ npm run preview  # Preview production build
 ## 🎨 Styling
 
 The application uses:
+
 - **Global Styles** - CSS Reset and typography
 - **Layout Styles** - Sidebar, Navbar, and responsive design
 - **Dashboard Styles** - Component-specific styling
@@ -103,6 +108,7 @@ The application uses:
 ## 📱 Responsive Design
 
 The application is fully responsive with breakpoints:
+
 - Desktop: 1024px+
 - Tablet: 768px - 1024px
 - Mobile: < 768px
@@ -110,6 +116,7 @@ The application is fully responsive with breakpoints:
 ## 📄 Documentation
 
 See [TransitOps/docs](./TransitOps/docs) for:
+
 - [API Documentation](./TransitOps/docs/API.md)
 - [Database Schema](./TransitOps/docs/Database.md)
 - [Design System](./TransitOps/docs/Design.md)
@@ -141,6 +148,7 @@ git push origin feature/feature-name
 ## 📝 Commit Message Format
 
 Follow conventional commits:
+
 - `feat:` - New feature
 - `fix:` - Bug fix
 - `docs:` - Documentation
