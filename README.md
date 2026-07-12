@@ -1,35 +1,30 @@
-
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/TransitOps-🚛-8a3cff?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM4YTNjZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIxIiB5PSIzIiB3aWR0aD0iMTUiIGhlaWdodD0iMTMiIHJ4PSIyIj48L3JlY3Q+PHBvbHlsaW5lIHBvaW50cz0iMTYgOCAyMCA4IDIzIDExIDIzIDE2IDE2IDE2Ij48L3BvbHlsaW5lZT48Y2lyY2xlIGN4PSI1LjUiIGN5PSIxOC41IiByPSIyLjUiPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjE4LjUiIGN5PSIxOC41IiByPSIyLjUiPjwvY2lyY2xlPjwvc3ZnPg==">
-    <img src="https://img.shields.io/badge/TransitOps-🚛-3b82f6?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMzYjgyZjYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIxIiB5PSIzIiB3aWR0aD0iMTUiIGhlaWdodD0iMTMiIHJ4PSIyIj48L3JlY3Q+PHBvbHlsaW5lIHBvaW50cz0iMTYgOCAyMCA4IDIzIDExIDIzIDE2IDE2IDE2Ij48L3BvbHlsaW5lZT48Y2lyY2xlIGN4PSI1LjUiIGN5PSIxOC41IiByPSIyLjUiPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjE4LjUiIGN5PSIxOC41IiByPSIyLjUiPjwvY2lyY2xlPjwvc3ZnPg==">
-  </picture>
+  <samp>
+    <big><strong>TransitOps</strong></big><br>
+    <sub>Smart Transport Operations Platform</sub>
+  </samp>
 </p>
 
-<h3 align="center">Smart Transport Operations Platform</h3>
-
 <p align="center">
-  <b>🏆 Odoo Hackathon 2026 — Team TransitOps</b><br>
+  <b>Odoo Hackathon 2026 — Team Runtime Terrors</b><br>
   <i>Enterprise fleet management, trip planning, and operational analytics</i>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Node.js-18%2B-339933?logo=node.js&logoColor=white">
-  <img src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white">
-  <img src="https://img.shields.io/badge/TypeScript-5.2-3178C6?logo=typescript&logoColor=white">
-  <img src="https://img.shields.io/badge/Express-4.19-000000?logo=express&logoColor=white">
-  <img src="https://img.shields.io/badge/Prisma-6.19-2D3748?logo=prisma&logoColor=white">
-  <img src="https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql&logoColor=white">
-  <img src="https://img.shields.io/badge/Tailwind_CSS-3.4-06B6D4?logo=tailwindcss&logoColor=white">
-  <img src="https://img.shields.io/badge/Vite-5.0-646CFF?logo=vite&logoColor=white">
-  <img src="https://img.shields.io/badge/JWT-auth-000000?logo=jsonwebtokens&logoColor=white">
-  <img src="https://img.shields.io/badge/license-MIT-yellow">
-  <img src="https://img.shields.io/badge/status-active-success">
+  <code>Node.js 18+</code>
+  <code>React 18</code>
+  <code>TypeScript</code>
+  <code>Express 4</code>
+  <code>Prisma 6</code>
+  <code>MySQL 8</code>
+  <code>Tailwind CSS 3</code>
+  <code>Vite 5</code>
+  <code>JWT</code>
 </p>
 
 ---
 
-## 👥 Team
+## Team
 
 | | Member | Role | GitHub |
 |---|--------|------|--------|
@@ -40,21 +35,21 @@
 
 ---
 
-## 📋 Overview
+## Overview
 
 TransitOps is a **full-stack fleet management platform** built for the **Odoo Hackathon 2026**. It enables organizations to:
 
-- 🚛 **Manage vehicles** — Track fleet inventory, status, and maintenance
-- 👤 **Manage drivers** — Licenses, safety scores, availability
-- 📦 **Plan & dispatch trips** — End-to-end trip lifecycle (Draft → Dispatched → Completed)
-- ⛽ **Track expenses** — Fuel logs, tolls, parking, permits
-- 🔧 **Schedule maintenance** — Active/closed work orders with cost tracking
-- 📊 **Generate reports** — KPIs, vehicle analytics, CSV export
-- 🔔 **Notifications** — Role-aware alerts for fleet events
+- **Manage vehicles** — Track fleet inventory, status, and maintenance
+- **Manage drivers** — Licenses, safety scores, availability
+- **Plan & dispatch trips** — End-to-end trip lifecycle (Draft → Dispatched → Completed)
+- **Track expenses** — Fuel logs, tolls, parking, permits
+- **Schedule maintenance** — Active/closed work orders with cost tracking
+- **Generate reports** — KPIs, vehicle analytics, CSV export
+- **Notifications** — Role-aware alerts for fleet events
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```mermaid
 graph TB
@@ -113,7 +108,7 @@ graph TB
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -170,20 +165,20 @@ cd client && npm run dev
 
 ---
 
-## 🔐 Default Credentials
+## Default Credentials
 
 | Role | Email | Password |
 |------|-------|----------|
-| 🛠️ **Fleet Manager** | `manager@transitops.com` | `divya123` |
-| 🛡️ **Safety Officer** | `safety@transitops.com` | `divya123` |
-| 📊 **Financial Analyst** | `finance@transitops.com` | `divya123` |
-| 🚚 **Driver** | `driver@transitops.com` | `divya123` |
+| **Fleet Manager** | `manager@transitops.com` | `divya123` |
+| **Safety Officer** | `safety@transitops.com` | `divya123` |
+| **Financial Analyst** | `finance@transitops.com` | `divya123` |
+| **Driver** | `driver@transitops.com` | `divya123` |
 
 > All accounts share password `divya123`. Register new users at `/register`.
 
 ---
 
-## 📐 Database Schema
+## Database Schema
 
 ```mermaid
 erDiagram
@@ -289,105 +284,28 @@ erDiagram
 
 ---
 
-## 📡 API Reference
+## Role-Based Access Control
 
-### Public Endpoints
-
-| Method | Path | Description |
-|--------|------|-------------|
-| `GET` | `/api/health` | Server health check |
-| `POST` | `/api/auth/register` | Register new user |
-| `POST` | `/api/auth/login` | Login → JWT token |
-
-### Authenticated Endpoints
-
-> All require `Authorization: Bearer <token>` header.
-
-#### 🚛 Vehicles (`/api/vehicles`)
-
-| Method | Path | Action | Roles |
-|--------|------|--------|-------|
-| `GET` | `/` | List all (filter by `?type=`, `?status=`) | All |
-| `POST` | `/` | Create vehicle | Fleet Manager |
-| `PUT` | `/:registrationNumber` | Update vehicle | Fleet Manager |
-| `DELETE` | `/:registrationNumber` | Delete vehicle | Fleet Manager |
-
-#### 👤 Drivers (`/api/drivers`)
-
-| Method | Path | Action | Roles |
-|--------|------|--------|-------|
-| `GET` | `/` | List all (filter by `?status=`) | All |
-| `POST` | `/` | Create driver | Fleet Manager, Safety Officer |
-| `PUT` | `/:id` | Update driver | Fleet Manager, Safety Officer |
-| `DELETE` | `/:id` | Delete driver | Fleet Manager |
-
-#### 📦 Trips (`/api/trips`)
-
-| Method | Path | Action | Roles |
-|--------|------|--------|-------|
-| `GET` | `/` | List all (filter by `?status=`) | All |
-| `POST` | `/` | Create trip (Draft) | Fleet Manager |
-| `PATCH` | `/:id/dispatch` | Dispatch trip | Fleet Manager |
-| `PATCH` | `/:id/complete` | Complete trip | Fleet Manager, Driver |
-| `PATCH` | `/:id/cancel` | Cancel trip | Fleet Manager |
-
-#### 🔧 Maintenance (`/api/maintenance`)
-
-| Method | Path | Action | Roles |
-|--------|------|--------|-------|
-| `GET` | `/` | List all | All |
-| `POST` | `/` | Create (auto-sets vehicle In Shop) | Fleet Manager |
-| `PATCH` | `/:id/close` | Close (auto-reverts vehicle to Available) | Fleet Manager |
-
-#### 💰 Expenses (`/api/expenses`)
-
-| Method | Path | Action | Roles |
-|--------|------|--------|-------|
-| `GET` | `/` | List all (filter by `?vehicleId=`) | All |
-| `GET` | `/cost/:vehicleId` | Operational cost summary | All |
-| `POST` | `/fuel` | Log fuel purchase | Fleet Manager, Driver |
-| `POST` | `/other` | Log other expense | Fleet Manager |
-
-#### 📈 Reports (`/api/reports`)
-
-| Method | Path | Action | Roles |
-|--------|------|--------|-------|
-| `GET` | `/kpis` | Dashboard KPIs | All |
-| `GET` | `/analytics/:registrationNumber` | Vehicle analytics | Fleet Manager, Financial Analyst |
-| `GET` | `/export/csv` | Export fleet CSV | Fleet Manager, Financial Analyst |
-
-#### 🔔 Notifications (`/api/notifications`)
-
-| Method | Path | Action | Roles |
-|--------|------|--------|-------|
-| `GET` | `/` | List recent (`?limit=`) | All |
-| `PATCH` | `/:id/read` | Mark one read | All |
-| `PATCH` | `/read-all` | Mark all read | All |
-
----
-
-## 🛡️ Role-Based Access Control
-
-| Capability | 🛠️ Fleet Manager | 🛡️ Safety Officer | 📊 Financial Analyst | 🚚 Driver |
+| Capability | Fleet Manager | Safety Officer | Financial Analyst | Driver |
 |------------|:---:|:---:|:---:|:---:|
-| **View all data** | ✅ | ✅ | ✅ | ✅ |
-| **Create vehicles** | ✅ | ❌ | ❌ | ❌ |
-| **Delete vehicles** | ✅ | ❌ | ❌ | ❌ |
-| **Create drivers** | ✅ | ✅ | ❌ | ❌ |
-| **Delete drivers** | ✅ | ❌ | ❌ | ❌ |
-| **Create/dispatch trips** | ✅ | ❌ | ❌ | ❌ |
-| **Complete trips** | ✅ | ❌ | ❌ | ✅ |
-| **Cancel trips** | ✅ | ❌ | ❌ | ❌ |
-| **Create maintenance** | ✅ | ❌ | ❌ | ❌ |
-| **Log fuel** | ✅ | ❌ | ❌ | ✅ |
-| **Log other expenses** | ✅ | ❌ | ❌ | ❌ |
-| **Vehicle analytics** | ✅ | ❌ | ✅ | ❌ |
-| **CSV export** | ✅ | ❌ | ✅ | ❌ |
-| **Dashboard KPIs** | ✅ | ✅ | ✅ | ✅ |
+| **View all data** | Y | Y | Y | Y |
+| **Create vehicles** | Y | - | - | - |
+| **Delete vehicles** | Y | - | - | - |
+| **Create drivers** | Y | Y | - | - |
+| **Delete drivers** | Y | - | - | - |
+| **Create/dispatch trips** | Y | - | - | - |
+| **Complete trips** | Y | - | - | Y |
+| **Cancel trips** | Y | - | - | - |
+| **Create maintenance** | Y | - | - | - |
+| **Log fuel** | Y | - | - | Y |
+| **Log other expenses** | Y | - | - | - |
+| **Vehicle analytics** | Y | - | Y | - |
+| **CSV export** | Y | - | Y | - |
+| **Dashboard KPIs** | Y | Y | Y | Y |
 
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 
 | Layer | Technology | Purpose |
 |-------|-----------|---------|
@@ -411,7 +329,7 @@ erDiagram
 
 ---
 
-## ✨ Features
+## Features
 
 ### Core Modules
 
@@ -427,40 +345,54 @@ erDiagram
 
 ### Business Rules Enforced
 
-- ✅ **Vehicle capacity check** before dispatching trips
-- ✅ **Driver license expiry validation** before dispatch
-- ✅ **Vehicle/driver availability** — auto-set when trip dispatched/completed/cancelled
-- ✅ **Maintenance ↔ vehicle sync** — vehicle set to `In Shop` on maintenance create, reverted on close
-- ✅ **Fuel log auto-creation** on trip completion
-- ✅ **Expense auto-generation** on maintenance close
-- ✅ **Cascading cache invalidation** — trip/expense/maintenance mutations refresh all related queries
+- `[x]` **Vehicle capacity check** before dispatching trips
+- `[x] **Driver license expiry validation** before dispatch
+- `[x] **Vehicle/driver availability** — auto-set when trip dispatched/completed/cancelled
+- `[x]` **Maintenance ↔ vehicle sync** — vehicle set to `In Shop` on maintenance create, reverted on close
+- `[x] **Fuel log auto-creation** on trip completion
+- `[x] **Expense auto-generation** on maintenance close
+- `[x] **Cascading cache invalidation** — trip/expense/maintenance mutations refresh all related queries
 
 ### UI Features
 
-- 🌓 **Dark/Light theme** — System preference + manual toggle (persisted in localStorage)
-- 📱 **Responsive design** — Desktop-first with mobile breakpoints
-- 🔍 **List/Grid views** on Drivers and Vehicles pages
-- 📥 **CSV export** on all data pages
-- 🔔 **Notification system** — Unread badge, mark-as-read
-- ⚡ **Optimistic UI** with React Query cache invalidation
+- `[x] **Dark/Light theme** — System preference + manual toggle (persisted in localStorage)
+- `[x] **Responsive design** — Desktop-first with mobile breakpoints
+- `[x] **List/Grid views** on Drivers and Vehicles pages
+- `[x] **CSV export** on all data pages
+- `[x] **Notification system** — Unread badge, mark-as-read
+- `[x] **Optimistic UI** with React Query cache invalidation
 
 ---
 
-## 🏆 Odoo Hackathon 2026
+## Odoo Hackathon 2026
 
-This project was built as part of the **Odoo Hackathon 2026**, an intensive coding competition where teams build innovative business applications. TransitOps addresses the challenge of **smart transport operations management** — providing a unified platform for fleet logistics, driver management, trip planning, and operational analytics.
+We built TransitOps in **6 hours**. 
 
-### Key Achievements
+It was chaos. Four screens, one shared MySQL database, and a lot of caffeine. Divya was juggling Prisma migrations while Krisha was hot-reloading the frontend for the 50th time. Khush kept muttering "just one more endpoint" while Rajvi was frantically adjusting padding because "it doesn't look right on 1440px." At some point we realized none of us had committed in two hours and the merge conflicts were going to be biblical.
 
-- **8 database models** with full Prisma ORM integration
-- **~30 REST API endpoints** with JWT authentication and role-based access
-- **Frontend** with 7 feature pages + authentication + dark mode
-- **11+ business rules** enforced at the API layer
-- **20 vehicles**, **15 drivers**, **17 trips** seeded for demo
+But we shipped it. 
+
+Eight database models, thirty API endpoints, a React frontend with dark mode, role-based access control, and enough business rules to make an ERP blush. All in a single weekend.
+
+Same energy. Same team. Same Runtime Terrors energy.
+
+### What we packed in
+
+| Metric | Number |
+|--------|--------|
+| Database models | 8 |
+| REST API endpoints | ~30 |
+| Frontend pages | 7 + auth |
+| Business rules enforced | 11+ |
+| Vehicles seeded | 20 |
+| Drivers seeded | 15 |
+| Trips seeded | 17 |
+| Hours to build | ~6 |
+| Cups of coffee | yes |
 
 ---
 
 <p align="center">
-  <sub>Built with ❤️ for <b>Odoo Hackathon 2026</b> by Divya, Krisha, Khush, and Rajvi</sub><br>
-  <sub>© 2026 TransitOps Team. All rights reserved.</sub>
+  <sub>Built for <b>Odoo Hackathon 2026</b> by Team Runtime Terrors — Divya, Krisha, Khush, and Rajvi</sub><br>
+  <sub>2026 Runtime Terrors. All rights reserved.</sub>
 </p>
