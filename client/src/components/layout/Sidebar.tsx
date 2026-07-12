@@ -39,9 +39,9 @@ function Sidebar({ isCollapsed }: SidebarProps) {
   return (
     <aside className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
       <div className="sidebar-header">
-        <div className="sidebar-logo">
+          <div className="sidebar-logo">
           <div className="logo-icon">
-            <FiTruck size={32} />
+            <img src="/image.png" alt="TransitOps" className="sidebar-logo-img" />
           </div>
           {!isCollapsed && (
             <div className="logo-text">

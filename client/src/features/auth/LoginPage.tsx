@@ -32,20 +32,11 @@ const LoginPage = () => {
   return (
     <div className="login-page">
       <div className="login-left">
-        <div className="login-left-top">
-          <div className="login-logo-placeholder" />
+        <div className="login-left-center">
+          <img src="/image.png" alt="TransitOps" width="100" height="100" style={{ borderRadius: '14px' }} />
           <div className="login-brand">
             <h1>TransitOps</h1>
             <p>Smart Transport Operations Platform</p>
-          </div>
-          <div className="login-roles">
-            <h3>One login, four roles:</h3>
-            <ul>
-              <li><span className="role-bullet" /> Fleet Manager</li>
-              <li><span className="role-bullet" /> Dispatcher</li>
-              <li><span className="role-bullet" /> Safety Officer</li>
-              <li><span className="role-bullet" /> Financial Analyst</li>
-            </ul>
           </div>
         </div>
         <div className="login-footer">TRANSITOPS &copy; 2026 - RBAC EX4</div>
