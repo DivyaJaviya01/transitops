@@ -105,28 +105,6 @@ const DashboardPage = () => {
           </div>
         </div>
 
-        <div className="dashboard-grid">
-          {kpiCards.map((card) => (
-            <div className="kpi-card" key={card.title} style={{ borderLeftColor: card.color }}>
-              <div className="kpi-card-top">
-                <div className="kpi-icon" style={{ background: card.bg, color: card.color }}>
-                  <span className="material-symbols-outlined">{card.icon}</span>
-                </div>
-                {card.trend && (
-                  <span className={`kpi-trend ${card.positive ? "positive" : "negative"}`}>
-                    <span className="material-symbols-outlined" style={{ fontSize: "14px" }}>
-                      {card.positive ? "trending_up" : "trending_down"}
-                    </span>
-                    {card.trend}
-                  </span>
-                )}
-              </div>
-              <h3>{card.title}</h3>
-              <p className="kpi-value" style={{ color: card.color }}>{card.value}</p>
-            </div>
-          ))}
-        </div>
-
         <div className="graph-card">
           <div className="graph-header">
             <h3>
@@ -156,6 +134,28 @@ const DashboardPage = () => {
               <Area type="monotone" dataKey="trips" stroke="#3b82f6" strokeWidth={3} fill="url(#tripGradient)" dot={{ fill: '#3b82f6', stroke: '#fff', strokeWidth: 2, r: 5 }} activeDot={{ r: 7, fill: '#3b82f6', stroke: '#fff', strokeWidth: 2 }} />
             </AreaChart>
           </ResponsiveContainer>
+        </div>
+
+        <div className="dashboard-grid">
+          {kpiCards.map((card) => (
+            <div className="kpi-card" key={card.title} style={{ borderLeftColor: card.color }}>
+              <div className="kpi-card-top">
+                <div className="kpi-icon" style={{ background: card.bg, color: card.color }}>
+                  <span className="material-symbols-outlined">{card.icon}</span>
+                </div>
+                {card.trend && (
+                  <span className={`kpi-trend ${card.positive ? "positive" : "negative"}`}>
+                    <span className="material-symbols-outlined" style={{ fontSize: "14px" }}>
+                      {card.positive ? "trending_up" : "trending_down"}
+                    </span>
+                    {card.trend}
+                  </span>
+                )}
+              </div>
+              <h3>{card.title}</h3>
+              <p className="kpi-value" style={{ color: card.color }}>{card.value}</p>
+            </div>
+          ))}
         </div>
 
         <div className="bottom-grid">
