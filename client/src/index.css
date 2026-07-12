@@ -13,10 +13,64 @@
   --accent-success: #238636;
   --accent-warning: #d29922;
   --accent-danger: #f85149;
+
+  --card-bg: #1a1f2e;
+  --card-border: #2d3548;
+  --table-header-bg: #0d1117;
+  --table-row-hover: #1a1f2e;
+  --input-bg: #0d1117;
+  --input-border: #30363d;
+  --badge-bg: #21262d;
+  --surface-elevated: #1c2333;
+  --surface-muted: #161b22;
   
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+
+  --badge-success-bg: rgba(16, 185, 129, 0.15);
+  --badge-success-fg: #34d399;
+  --badge-info-bg: rgba(59, 130, 246, 0.15);
+  --badge-info-fg: #60a5fa;
+  --badge-warning-bg: rgba(245, 158, 11, 0.15);
+  --badge-warning-fg: #fbbf24;
+  --badge-danger-bg: rgba(239, 68, 68, 0.15);
+  --badge-danger-fg: #f87171;
+  --trend-positive-bg: rgba(16, 185, 129, 0.1);
+  --trend-positive-fg: #34d399;
+  --trend-negative-bg: rgba(239, 68, 68, 0.1);
+  --trend-negative-fg: #f87171;
+
+  --status-available-bg: rgba(16, 185, 129, 0.15);
+  --status-available-fg: #34d399;
+  --status-available-dot: #34d399;
+  --status-trip-bg: rgba(59, 130, 246, 0.15);
+  --status-trip-fg: #60a5fa;
+  --status-trip-dot: #60a5fa;
+  --status-shop-bg: rgba(245, 158, 11, 0.15);
+  --status-shop-fg: #fbbf24;
+  --status-shop-dot: #fbbf24;
+  --status-retired-bg: rgba(148, 163, 184, 0.15);
+  --status-retired-fg: #94a3b8;
+  --status-retired-dot: #94a3b8;
+  --status-duty-bg: rgba(148, 163, 184, 0.15);
+  --status-duty-fg: #94a3b8;
+  --status-duty-dot: #94a3b8;
+  --status-suspended-bg: rgba(239, 68, 68, 0.15);
+  --status-suspended-fg: #f87171;
+  --status-suspended-dot: #f87171;
+
+  --stat-fleet-bg: rgba(59, 130, 246, 0.15);
+  --stat-fleet-fg: #60a5fa;
+  --stat-active-bg: rgba(16, 185, 129, 0.15);
+  --stat-active-fg: #34d399;
+  --stat-maint-bg: rgba(245, 158, 11, 0.15);
+  --stat-maint-fg: #fbbf24;
+  --stat-available-bg: rgba(148, 163, 184, 0.15);
+  --stat-available-fg: #94a3b8;
+
+  --avatar-bg: rgba(59, 130, 246, 0.15);
+  --avatar-fg: #60a5fa;
 }
 
 /* Light Theme overrides */
@@ -31,9 +85,63 @@
   --accent-warning: #f59e0b;
   --accent-danger: #ef4444;
 
+  --card-bg: #ffffff;
+  --card-border: #e5e7eb;
+  --table-header-bg: #f9fafb;
+  --table-row-hover: #f9fafb;
+  --input-bg: #ffffff;
+  --input-border: #d1d5db;
+  --badge-bg: #f3f4f6;
+  --surface-elevated: #f8f9ff;
+  --surface-muted: #f0f2f5;
+
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+  --badge-success-bg: #dcfce7;
+  --badge-success-fg: #166534;
+  --badge-info-bg: #dbeafe;
+  --badge-info-fg: #1e40af;
+  --badge-warning-bg: #fef3c7;
+  --badge-warning-fg: #92400e;
+  --badge-danger-bg: #fef2f2;
+  --badge-danger-fg: #dc2626;
+  --trend-positive-bg: #ecfdf5;
+  --trend-positive-fg: #059669;
+  --trend-negative-bg: #fef2f2;
+  --trend-negative-fg: #dc2626;
+
+  --status-available-bg: #dcfce7;
+  --status-available-fg: #15803d;
+  --status-available-dot: #15803d;
+  --status-trip-bg: #dbeafe;
+  --status-trip-fg: #1d4ed8;
+  --status-trip-dot: #1d4ed8;
+  --status-shop-bg: #ffedd5;
+  --status-shop-fg: #c2410c;
+  --status-shop-dot: #c2410c;
+  --status-retired-bg: #f1f5f9;
+  --status-retired-fg: #475569;
+  --status-retired-dot: #475569;
+  --status-duty-bg: #f1f5f9;
+  --status-duty-fg: #475569;
+  --status-duty-dot: #475569;
+  --status-suspended-bg: #fee2e2;
+  --status-suspended-fg: #b91c1c;
+  --status-suspended-dot: #b91c1c;
+
+  --stat-fleet-bg: #eff6ff;
+  --stat-fleet-fg: #2563eb;
+  --stat-active-bg: #ecfdf5;
+  --stat-active-fg: #16a34a;
+  --stat-maint-bg: #fff7ed;
+  --stat-maint-fg: #ea580c;
+  --stat-available-bg: #f1f5f9;
+  --stat-available-fg: #475569;
+
+  --avatar-bg: #eff6ff;
+  --avatar-fg: #2563eb;
 }
 
 body {

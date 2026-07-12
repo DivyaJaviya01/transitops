@@ -90,7 +90,7 @@ const ReportsPage = () => {
                         <tr
                           key={v.registrationNumber}
                           style={{
-                            backgroundColor: selectedVehicle === v.registrationNumber ? 'var(--bg-primary)' : 'transparent',
+                            backgroundColor: selectedVehicle === v.registrationNumber ? 'var(--table-row-hover)' : 'transparent',
                             cursor: 'pointer'
                           }}
                           onClick={() => setSelectedVehicle(v.registrationNumber)}
@@ -120,8 +120,8 @@ const ReportsPage = () => {
             <h3 style={{ marginBottom: '1rem' }}>Vehicle Telemetry & ROI</h3>
             {!selectedVehicle ? (
               <div style={{
-                background: 'var(--bg-secondary)',
-                border: '1px solid var(--border-color)',
+                background: 'var(--card-bg)',
+                border: '1px solid var(--card-border)',
                 borderRadius: '8px',
                 padding: '3rem',
                 textAlign: 'center',
@@ -134,8 +134,8 @@ const ReportsPage = () => {
               <p style={{ color: 'var(--text-secondary)' }}>Computing operational telemetry...</p>
             ) : analytics ? (
               <div style={{
-                background: 'var(--bg-secondary)',
-                border: '1px solid var(--border-color)',
+                background: 'var(--card-bg)',
+                border: '1px solid var(--card-border)',
                 borderRadius: '8px',
                 padding: '2rem'
               }}>
@@ -144,25 +144,25 @@ const ReportsPage = () => {
                 </h2>
                 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                  <div style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '1rem' }}>
+                  <div style={{ borderBottom: '1px solid var(--card-border)', paddingBottom: '1rem' }}>
                     <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85rem' }}>Fuel Efficiency</p>
                     <p style={{ margin: '0.25rem 0 0 0', fontSize: '1.25rem', fontWeight: 700 }}>
                       {analytics.fuelEfficiencyKmPerLiter} km / Liter
                     </p>
                   </div>
-                  <div style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '1rem' }}>
+                  <div style={{ borderBottom: '1px solid var(--card-border)', paddingBottom: '1rem' }}>
                     <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85rem' }}>Total Distance Traveled</p>
                     <p style={{ margin: '0.25rem 0 0 0', fontSize: '1.25rem', fontWeight: 700 }}>
                       {analytics.totalDistanceTraveledKm} km
                     </p>
                   </div>
-                  <div style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '1rem' }}>
+                  <div style={{ borderBottom: '1px solid var(--card-border)', paddingBottom: '1rem' }}>
                     <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85rem' }}>Operational Costs (Fuel & Shop)</p>
                     <p style={{ margin: '0.25rem 0 0 0', fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent-danger)' }}>
                       -${analytics.totalOperationalCost.toLocaleString()}
                     </p>
                   </div>
-                  <div style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '1rem' }}>
+                  <div style={{ borderBottom: '1px solid var(--card-border)', paddingBottom: '1rem' }}>
                     <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85rem' }}>Estimated Revenue ($5.00/km)</p>
                     <p style={{ margin: '0.25rem 0 0 0', fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent-success)' }}>
                       +${analytics.estimatedRevenue.toLocaleString()}

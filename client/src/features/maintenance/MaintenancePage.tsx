@@ -133,8 +133,8 @@ const MaintenancePage = () => {
             zIndex: 1000
           }}>
             <div style={{
-              background: 'var(--bg-secondary)',
-              border: '1px solid var(--border-color)',
+              background: 'var(--card-bg)',
+              border: '1px solid var(--card-border)',
               borderRadius: '12px',
               padding: '2.5rem',
               width: '100%', maxWidth: '500px',
@@ -150,7 +150,7 @@ const MaintenancePage = () => {
                       onChange={(e) => setForm({ ...form, vehicleId: e.target.value })}
                       style={{
                         width: '100%', padding: '0.75rem 1rem', borderRadius: '8px',
-                        border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-primary)',
+                        border: '1px solid var(--card-border)', backgroundColor: 'var(--input-bg)',
                         color: 'var(--text-primary)', outline: 'none'
                       }}
                     >
@@ -169,7 +169,7 @@ const MaintenancePage = () => {
                       onChange={(e) => setForm({ ...form, type: e.target.value })}
                       style={{
                         width: '100%', padding: '0.75rem 1rem', borderRadius: '8px',
-                        border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-primary)',
+                        border: '1px solid var(--card-border)', backgroundColor: 'var(--input-bg)',
                         color: 'var(--text-primary)', outline: 'none'
                       }}
                     >
@@ -221,7 +221,7 @@ const MaintenancePage = () => {
                     className="login-button"
                     style={{
                       marginTop: 0, backgroundColor: 'transparent',
-                      border: '1px solid var(--border-color)', color: 'var(--text-secondary)'
+                      border: '1px solid var(--card-border)', color: 'var(--text-secondary)'
                     }}
                   >
                     Cancel
@@ -238,8 +238,8 @@ const MaintenancePage = () => {
             <p style={{ color: 'var(--text-secondary)' }}>Loading logs...</p>
           ) : !logs || logs.length === 0 ? (
             <div style={{
-              background: 'var(--bg-secondary)',
-              border: '1px solid var(--border-color)',
+              background: 'var(--card-bg)',
+              border: '1px solid var(--card-border)',
               borderRadius: '8px',
               padding: '3rem',
               textAlign: 'center',
