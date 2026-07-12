@@ -1,98 +1,34 @@
 # Technology Stack - TransitOps
 
 ## 1. Frontend Architecture
-*   **Framework**: [React](https://react.dev/) (via [Vite](https://vitejs.dev/))
-    *   *Why*: Fast dev reload, component-driven, easy state management.
-*   **Styling**: Vanilla CSS (Custom Properties / CSS Variables)
-    *   *Why*: Premium bespoke aesthetics, no bloated CSS framework dependencies, complete control over modern UI/UX design.
-*   **Icons**: [Lucide React](https://lucide.dev/)
-    *   *Why*: Modern, clean, consistent vector icon pack.
-*   **Routing**: [React Router DOM](https://reactrouter.com/) (SPA Routing)
+*   **Framework**: React (Vite + TypeScript)
+*   **Styling**: Tailwind CSS & shadcn/ui (Tailwind-based primitives)
+*   **Routing**: React Router DOM (v6+)
+*   **State & Data Fetching**: TanStack Query (React Query v5)
+*   **Form Management**: React Hook Form
+*   **Validation**: Zod
+*   **HTTP Client**: Axios
+*   **Icons**: Lucide React
+*   **Charts**: Recharts
+*   **Notifications**: Sonner
 
 ---
 
-## 2. Backend & Database Services
-*   **Platform**: [Firebase](https://firebase.google.com/) (via `firebase-mcp-server` integration)
-*   **Authentication**: Firebase Authentication
-    *   *Why*: Built-in email/password auth and role metadata secure storage.
-*   **Database**: Cloud Firestore (NoSQL Document Store)
-    *   *Why*: Real-time updates for live trip tracking, document-based architecture aligning with vehicle, driver, and trip profiles.
-*   **Hosting**: Firebase Hosting
-    *   *Why*: Global CDN, simple deployment commands, secure HTTPS by default.
+## 2. Backend Architecture
+*   **Platform**: Node.js & Express (ES Modules)
+*   **Authentication**: JSON Web Tokens (JWT) for session management, bcrypt for password hashing.
+*   **ORM**: Prisma ORM
+*   **Database**: MySQL
+*   **Security & Helpers**: CORS, Dotenv
 
 ---
 
-## 3. Database Schema Design (Cloud Firestore)
+## 3. Database Schema Design (Prisma / MySQL)
 
-### `users` (Collection)
-*   `uid` (Document ID): String
-*   `email`: String
-*   `role`: String (`"Fleet Manager"` | `"Driver"` | `"Safety Officer"` | `"Financial Analyst"`)
-*   `name`: String
-
-### `vehicles` (Collection)
-*   `registrationNumber` (Document ID): String (Unique)
-*   `name`: String
-*   `type`: String (`"Truck"` | `"Van"` | `"Sedan"`)
-*   `maxLoadCapacity`: Number (kg)
-*   `odometer`: Number (km)
-*   `acquisitionCost`: Number
-*   `status`: String (`"Available"` | `"On Trip"` | `"In Shop"` | `"Retired"`)
-
-### `drivers` (Collection)
-*   `driverId` (Document ID): String
-*   `name`: String
-*   `licenseNumber`: String (Unique)
-*   `licenseCategory`: String
-*   `licenseExpiryDate`: Timestamp
-*   `contactNumber`: String
-*   `safetyScore`: Number (0-100)
-*   `status`: String (`"Available"` | `"On Trip"` | `"Off Duty"` | `"Suspended"`)
-
-### `trips` (Collection)
-*   `tripId` (Document ID): String
-*   `source`: String
-*   `destination`: String
-*   `vehicleId`: String (Ref: `vehicles`)
-*   `driverId`: String (Ref: `drivers`)
-*   `cargoWeight`: Number (kg)
-*   `plannedDistance`: Number (km)
-*   `actualDistance`: Number (km, populated on completion)
-*   `fuelConsumed`: Number (Liters, populated on completion)
-*   `status`: String (`"Draft"` | `"Dispatched"` | `"Completed"` | `"Cancelled"`)
-*   `timestamps`: Map
-    *   `created`: Timestamp
-    *   `dispatched`: Timestamp
-    *   `completed`: Timestamp
-
-### `maintenance_logs` (Collection)
-*   `logId` (Document ID): String
-*   `vehicleId`: String (Ref: `vehicles`)
-*   `type`: String
-*   `cost`: Number
-*   `startDate`: Timestamp
-*   `estimatedCompletionDate`: Timestamp
-*   `actualCompletionDate`: Timestamp
-*   `status`: String (`"Active"` | `"Closed"`)
-
-### `fuel_logs` (Collection)
-*   `logId` (Document ID): String
-*   `vehicleId`: String (Ref: `vehicles`)
-*   `liters`: Number
-*   `cost`: Number
-*   `date`: Timestamp
-
-### `expenses` (Collection)
-*   `expenseId` (Document ID): String
-*   `vehicleId`: String (Ref: `vehicles`)
-*   `amount`: Number
-*   `date`: Timestamp
-*   `category`: String (`"Tolls"` | `"Parking"` | `"Permits"` | `"Other"`)
-*   `description`: String
-
----
-
-## 4. Prototyping & Development Tools
-*   **Prototyping**: StitchMCP (for rapid screen layout generation and iteration)
-*   **Environment**: Node.js & npm
-*   **Linter/Formatter**: ESLint & Prettier
+Refer to [schema.prisma](file:///d:/Odoo%20Hackathon%202026/TransitOPs/server/prisma/schema.prisma) for exact database structures and relationships.
+*   **Users Table**: Store roles, credentials, and profile info.
+*   **Vehicles Table**: Store unique registration plates, types, odometer, capacities, status.
+*   **Drivers Table**: Store compliance info, safety score, status, licenses.
+*   **Trips Table**: Track dispatches, statuses (`Draft` -> `Dispatched` -> `Completed` -> `Cancelled`), source/destination, distances, and fuel.
+*   **Maintenance Logs**: Log start, end, estimates, costs, and status.
+*   **Fuel Logs & Expenses**: Store litrage, costs, toll categories, and descriptions.
