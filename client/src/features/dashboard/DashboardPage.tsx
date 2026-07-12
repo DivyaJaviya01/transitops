@@ -62,13 +62,13 @@ const DashboardPage = () => {
   })();
 
   const kpiCards = [
-    { title: "Active Vehicles", value: kpiData?.activeVehicles ?? "...", icon: "local_shipping", color: "#3b82f6", bg: "#eff6ff", trend: "", positive: true },
-    { title: "Available Vehicles", value: kpiData?.availableVehicles ?? "...", icon: "check_circle", color: "#10b981", bg: "#ecfdf5", trend: "", positive: true },
-    { title: "In Maintenance", value: kpiData?.maintenanceVehicles ?? "...", icon: "build", color: "#f59e0b", bg: "#fffbeb", trend: "", positive: false },
-    { title: "Active Trips", value: kpiData?.activeTrips ?? "...", icon: "route", color: "#8b5cf6", bg: "#f5f3ff", trend: "", positive: true },
-    { title: "Pending Trips", value: kpiData?.pendingTrips ?? "...", icon: "pending_actions", color: "#ef4444", bg: "#fef2f2", trend: "", positive: false },
-    { title: "Drivers On Duty", value: kpiData?.driversOnDuty ?? "...", icon: "person", color: "#06b6d4", bg: "#ecfeff", trend: "", positive: true },
-    { title: "Fleet Utilization", value: kpiLoading ? "..." : `${kpiData?.fleetUtilizationPercentage ?? 0}%`, icon: "speed", color: "#f97316", bg: "#fff7ed", trend: "", positive: true },
+    { title: "Active Vehicles", value: kpiData?.activeVehicles ?? "...", icon: "local_shipping", color: "#3b82f6", bg: "rgba(59,130,246,0.1)", trend: "", positive: true },
+    { title: "Available Vehicles", value: kpiData?.availableVehicles ?? "...", icon: "check_circle", color: "#10b981", bg: "rgba(16,185,129,0.1)", trend: "", positive: true },
+    { title: "In Maintenance", value: kpiData?.maintenanceVehicles ?? "...", icon: "build", color: "#f59e0b", bg: "rgba(245,158,11,0.1)", trend: "", positive: false },
+    { title: "Active Trips", value: kpiData?.activeTrips ?? "...", icon: "route", color: "#8b5cf6", bg: "rgba(139,92,246,0.1)", trend: "", positive: true },
+    { title: "Pending Trips", value: kpiData?.pendingTrips ?? "...", icon: "pending_actions", color: "#ef4444", bg: "rgba(239,68,68,0.1)", trend: "", positive: false },
+    { title: "Drivers On Duty", value: kpiData?.driversOnDuty ?? "...", icon: "person", color: "#06b6d4", bg: "rgba(6,182,212,0.1)", trend: "", positive: true },
+    { title: "Fleet Utilization", value: kpiLoading ? "..." : `${kpiData?.fleetUtilizationPercentage ?? 0}%`, icon: "speed", color: "#f97316", bg: "rgba(249,115,22,0.1)", trend: "", positive: true },
   ];
 
   const activities = (trips || [])
@@ -126,12 +126,12 @@ const DashboardPage = () => {
                   <stop offset="100%" stopColor="#3b82f6" stopOpacity={0.02} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" vertical={false} />
-              <XAxis dataKey="day" tick={{ fontSize: 12, fill: '#9ca3af' }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fontSize: 12, fill: '#9ca3af' }} axisLine={false} tickLine={false} allowDecimals={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--card-border)" vertical={false} />
+              <XAxis dataKey="day" tick={{ fontSize: 12, fill: 'var(--text-secondary)' }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fontSize: 12, fill: 'var(--text-secondary)' }} axisLine={false} tickLine={false} allowDecimals={false} />
               <Tooltip
-                contentStyle={{ borderRadius: 10, border: '1px solid #e5e7eb', boxShadow: '0 4px 16px rgba(0,0,0,0.1)' }}
-                labelStyle={{ fontWeight: 600, color: '#111827' }}
+                contentStyle={{ borderRadius: 10, border: '1px solid var(--card-border)', boxShadow: 'var(--shadow-lg)' }}
+                labelStyle={{ fontWeight: 600, color: 'var(--text-primary)' }}
               />
               <Area type="monotone" dataKey="trips" stroke="#3b82f6" strokeWidth={3} fill="url(#tripGradient)" dot={{ fill: '#3b82f6', stroke: '#fff', strokeWidth: 2, r: 5 }} activeDot={{ r: 7, fill: '#3b82f6', stroke: '#fff', strokeWidth: 2 }} />
             </AreaChart>
@@ -187,13 +187,13 @@ const DashboardPage = () => {
                       <td>{trip.driver?.name || '-'}</td>
                       <td>{trip.source} → {trip.destination}</td>
                       <td><span className={statusColors[trip.status] || 'status-badge pending'}>{trip.status}</span></td>
-                      <td style={{ color: "#9ca3af", fontSize: "0.85rem" }}>
+                      <td style={{ color: 'var(--text-secondary)', fontSize: "0.85rem" }}>
                         {new Date(trip.updatedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </td>
                     </tr>
                   ))}
                   {recentTrips.length === 0 && (
-                    <tr><td colSpan={5} style={{ textAlign: 'center', color: '#9ca3af', padding: '2rem' }}>No trips yet</td></tr>
+                    <tr><td colSpan={5} style={{ textAlign: 'center', color: 'var(--text-secondary)', padding: '2rem' }}>No trips yet</td></tr>
                   )}
                 </tbody>
               </table>
@@ -218,7 +218,7 @@ const DashboardPage = () => {
                 </div>
               ))}
               {activities.length === 0 && (
-                <p style={{ textAlign: 'center', color: '#9ca3af', padding: '2rem' }}>No recent activity</p>
+                <p style={{ textAlign: 'center', color: 'var(--text-secondary)', padding: '2rem' }}>No recent activity</p>
               )}
             </div>
           </div>

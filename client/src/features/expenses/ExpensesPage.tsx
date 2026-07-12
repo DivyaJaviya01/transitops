@@ -153,7 +153,7 @@ const ExpensesPage = () => {
             <button
               onClick={() => setShowExpenseModal(true)}
               className="login-button"
-              style={{ width: 'auto', display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: 0, backgroundColor: 'transparent', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}
+              style={{ width: 'auto', display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: 0, backgroundColor: 'transparent', border: '1px solid var(--card-border)', color: 'var(--text-primary)' }}
             >
               <FiPlus /> Record Expense
             </button>
@@ -163,8 +163,8 @@ const ExpensesPage = () => {
         {/* Cost Calculator Section */}
         <div style={{
           marginTop: '2rem',
-          background: 'var(--bg-secondary)',
-          border: '1px solid var(--border-color)',
+          background: 'var(--card-bg)',
+          border: '1px solid var(--card-border)',
           borderRadius: '8px',
           padding: '1.5rem'
         }}>
@@ -175,7 +175,7 @@ const ExpensesPage = () => {
               onChange={(e) => setSelectedCostVehicle(e.target.value)}
               style={{
                 padding: '0.75rem 1rem', borderRadius: '8px',
-                border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-primary)',
+                border: '1px solid var(--card-border)', backgroundColor: 'var(--input-bg)',
                 color: 'var(--text-primary)', outline: 'none'
               }}
             >
@@ -190,7 +190,7 @@ const ExpensesPage = () => {
           {costData && (
             <div style={{
               display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-              gap: '1.5rem', marginTop: '1.5rem', borderTop: '1px solid var(--border-color)',
+              gap: '1.5rem', marginTop: '1.5rem', borderTop: '1px solid var(--card-border)',
               paddingTop: '1.5rem'
             }}>
               <div>
@@ -219,7 +219,7 @@ const ExpensesPage = () => {
             zIndex: 1000
           }}>
             <div style={{
-              background: 'var(--bg-secondary)', border: '1px solid var(--border-color)',
+              background: 'var(--card-bg)', border: '1px solid var(--card-border)',
               borderRadius: '12px', padding: '2.5rem', width: '100%', maxWidth: '450px',
               boxShadow: 'var(--shadow-md)'
             }}>
@@ -233,7 +233,7 @@ const ExpensesPage = () => {
                       onChange={(e) => setFuelForm({ ...fuelForm, vehicleId: e.target.value })}
                       style={{
                         width: '100%', padding: '0.75rem 1rem', borderRadius: '8px',
-                        border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-primary)',
+                        border: '1px solid var(--card-border)', backgroundColor: 'var(--input-bg)',
                         color: 'var(--text-primary)', outline: 'none'
                       }}
                     >
@@ -272,7 +272,7 @@ const ExpensesPage = () => {
                     className="login-button"
                     style={{
                       marginTop: 0, backgroundColor: 'transparent',
-                      border: '1px solid var(--border-color)', color: 'var(--text-secondary)'
+                      border: '1px solid var(--card-border)', color: 'var(--text-secondary)'
                     }}
                   >
                     Cancel
@@ -291,7 +291,7 @@ const ExpensesPage = () => {
             zIndex: 1000
           }}>
             <div style={{
-              background: 'var(--bg-secondary)', border: '1px solid var(--border-color)',
+              background: 'var(--card-bg)', border: '1px solid var(--card-border)',
               borderRadius: '12px', padding: '2.5rem', width: '100%', maxWidth: '450px',
               boxShadow: 'var(--shadow-md)'
             }}>
@@ -305,7 +305,7 @@ const ExpensesPage = () => {
                       onChange={(e) => setExpenseForm({ ...expenseForm, vehicleId: e.target.value })}
                       style={{
                         width: '100%', padding: '0.75rem 1rem', borderRadius: '8px',
-                        border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-primary)',
+                        border: '1px solid var(--card-border)', backgroundColor: 'var(--input-bg)',
                         color: 'var(--text-primary)', outline: 'none'
                       }}
                     >
@@ -333,7 +333,7 @@ const ExpensesPage = () => {
                       onChange={(e) => setExpenseForm({ ...expenseForm, category: e.target.value })}
                       style={{
                         width: '100%', padding: '0.75rem 1rem', borderRadius: '8px',
-                        border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-primary)',
+                        border: '1px solid var(--card-border)', backgroundColor: 'var(--input-bg)',
                         color: 'var(--text-primary)', outline: 'none'
                       }}
                     >
@@ -360,7 +360,7 @@ const ExpensesPage = () => {
                     className="login-button"
                     style={{
                       marginTop: 0, backgroundColor: 'transparent',
-                      border: '1px solid var(--border-color)', color: 'var(--text-secondary)'
+                      border: '1px solid var(--card-border)', color: 'var(--text-secondary)'
                     }}
                   >
                     Cancel
@@ -377,7 +377,7 @@ const ExpensesPage = () => {
             <p style={{ color: 'var(--text-secondary)' }}>Loading ledger...</p>
           ) : !expenses || expenses.length === 0 ? (
             <div style={{
-              background: 'var(--bg-secondary)', border: '1px solid var(--border-color)',
+              background: 'var(--card-bg)', border: '1px solid var(--card-border)',
               borderRadius: '8px', padding: '3rem', textAlign: 'center',
               color: 'var(--text-secondary)'
             }}>
