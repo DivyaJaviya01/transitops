@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FiSearch, FiBell, FiUser, FiChevronDown } from 'react-icons/fi';
 
 function Navbar() {
