@@ -38,7 +38,7 @@ const LoginPage = () => {
             <h1>TransitOps</h1>
             <p>Smart Transport Operations Platform</p>
           </div>
-          <div className="login-roles">
+          //<div className="login-roles">
             <h3>One login, four roles:</h3>
             <ul>
               <li><span className="role-bullet" /> Fleet Manager</li>
@@ -46,7 +46,7 @@ const LoginPage = () => {
               <li><span className="role-bullet" /> Safety Officer</li>
               <li><span className="role-bullet" /> Financial Analyst</li>
             </ul>
-          </div>
+          </div>//
         </div>
         <div className="login-footer">TRANSITOPS &copy; 2026 - RBAC EX4</div>
       </div>
