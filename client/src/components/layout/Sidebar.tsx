@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FiHome, FiTruck, FiUsers, FiNavigation, FiDollarSign, FiTool, FiFileText, FiSettings, FiLogOut } from 'react-icons/fi';
+import { useAuth } from '../../context/AuthContext';
 
 interface MenuItem {
   id: string;
@@ -15,6 +16,8 @@ interface SidebarProps {
 
 function Sidebar({ isCollapsed }: SidebarProps) {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const mainMenuItems: MenuItem[] = [
     { id: 'dashboard', label: 'Dashboard', icon: <FiHome size={20} />, to: '/' },
@@ -73,14 +76,14 @@ function Sidebar({ isCollapsed }: SidebarProps) {
       <div className="sidebar-section">
         {!isCollapsed && <h3 className="section-title">SETTINGS</h3>}
         <div className="sidebar-footer-menu">
-          <Link to="/settings" className="menu-item settings">
+          <div className="menu-item settings" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
             <span className="menu-icon"><FiSettings size={20} /></span>
             {!isCollapsed && <span className="menu-label">Settings</span>}
-          </Link>
-          <Link to="/login" className="menu-item logout">
+          </div>
+          <div className="menu-item logout" onClick={() => logout()} style={{ cursor: 'pointer' }}>
             <span className="menu-icon"><FiLogOut size={20} /></span>
             {!isCollapsed && <span className="menu-label">Logout</span>}
-          </Link>
+          </div>
         </div>
       </div>
     </aside>
