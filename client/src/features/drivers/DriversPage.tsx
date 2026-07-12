@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import api from '../../services/api';
 import MainLayout from "../../components/layout/MainLayout.tsx";
 
@@ -17,8 +17,79 @@ const statusDot: Record<string, string> = {
   'Suspended': 'bg-red-700',
 };
 
+const DriverForm = ({ onSubmit, onCancel, loading }: { onSubmit: (data: any) => void; onCancel: () => void; loading: boolean }) => {
+  const [form, setForm] = useState({ name: '', licenseNumber: '', licenseCategory: 'Class A', licenseExpiryDate: '', contactNumber: '', status: 'Available', safetyScore: 85 });
+  return (
+    <form onSubmit={(e) => { e.preventDefault(); onSubmit({ ...form, licenseExpiryDate: new Date(form.licenseExpiryDate) }); }} className="space-y-4">
+      <div>
+        <label className="text-[12px] font-bold text-[#76777d] uppercase tracking-wider">Full Name</label>
+        <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full border border-[#c6c6cd] rounded-lg px-4 py-2.5 text-[14px] mt-1 focus:ring-[#0058be] focus:border-[#0058be]" required />
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="text-[12px] font-bold text-[#76777d] uppercase tracking-wider">License Number</label>
+          <input value={form.licenseNumber} onChange={(e) => setForm({ ...form, licenseNumber: e.target.value })} className="w-full border border-[#c6c6cd] rounded-lg px-4 py-2.5 text-[14px] mt-1" required />
+        </div>
+        <div>
+          <label className="text-[12px] font-bold text-[#76777d] uppercase tracking-wider">License Category</label>
+          <select value={form.licenseCategory} onChange={(e) => setForm({ ...form, licenseCategory: e.target.value })} className="w-full border border-[#c6c6cd] rounded-lg px-4 py-2.5 text-[14px] mt-1">
+            <option value="Class A">Class A</option>
+            <option value="Class B">Class B</option>
+            <option value="Class C">Class C</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label className="text-[12px] font-bold text-[#76777d] uppercase tracking-wider">Contact Number</label>
+        <input value={form.contactNumber} onChange={(e) => setForm({ ...form, contactNumber: e.target.value })} className="w-full border border-[#c6c6cd] rounded-lg px-4 py-2.5 text-[14px] mt-1" placeholder="e.g. +1-555-1234" required />
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="text-[12px] font-bold text-[#76777d] uppercase tracking-wider">License Expiry</label>
+          <input type="date" value={form.licenseExpiryDate} onChange={(e) => setForm({ ...form, licenseExpiryDate: e.target.value })} className="w-full border border-[#c6c6cd] rounded-lg px-4 py-2.5 text-[14px] mt-1" required />
+        </div>
+        <div>
+          <label className="text-[12px] font-bold text-[#76777d] uppercase tracking-wider">Status</label>
+          <select value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })} className="w-full border border-[#c6c6cd] rounded-lg px-4 py-2.5 text-[14px] mt-1">
+            <option value="Available">Available</option>
+            <option value="On Trip">On Trip</option>
+            <option value="Off Duty">Off Duty</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label className="text-[12px] font-bold text-[#76777d] uppercase tracking-wider">Safety Score (0-100)</label>
+        <input type="number" value={form.safetyScore} onChange={(e) => setForm({ ...form, safetyScore: Number(e.target.value) })} className="w-full border border-[#c6c6cd] rounded-lg px-4 py-2.5 text-[14px] mt-1" min="0" max="100" />
+      </div>
+      <div className="flex justify-end gap-3 mt-6">
+        <button type="button" onClick={onCancel} className="px-6 py-2.5 rounded-lg text-[12px] font-bold text-[#76777d] border border-[#c6c6cd] hover:bg-gray-50">Cancel</button>
+        <button type="submit" disabled={loading} className="bg-secondary text-white px-6 py-2.5 rounded-lg text-[12px] font-bold hover:opacity-90 disabled:opacity-50">{loading ? 'Saving...' : 'Save Driver'}</button>
+      </div>
+    </form>
+  );
+};
+
 const DriversPage = () => {
   const [statusFilter, setStatusFilter] = useState('');
+  const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
+  const [showAddDriver, setShowAddDriver] = useState(false);
+  const queryClient = useQueryClient();
+
+  const handleExportCSV = () => {
+    const token = localStorage.getItem('token');
+    window.open(`http://localhost:5000/api/reports/export/csv?token=${token}`, '_blank');
+  };
+
+  const addDriverMutation = useMutation({
+    mutationFn: async (data: any) => {
+      const res = await api.post('/drivers', data);
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['drivers'] });
+      setShowAddDriver(false);
+    },
+  });
 
   const { data: allDrivers, isLoading } = useQuery({
     queryKey: ['drivers', statusFilter],
@@ -98,11 +169,11 @@ const DriversPage = () => {
           <div className="px-6 py-4 border-b border-outline-variant flex flex-col md:flex-row gap-4 items-start md:items-center justify-between bg-surface-container-lowest">
             <div className="flex flex-wrap items-center gap-4 w-full md:w-auto">
               <div className="flex bg-surface-container-low rounded-lg p-1 border border-outline-variant">
-                <button className="px-4 py-1.5 rounded-md bg-white shadow-sm text-label-md text-on-surface flex items-center gap-2">
+                <button onClick={() => setViewMode('list')} className={`px-4 py-1.5 rounded-md text-label-md flex items-center gap-2 transition-colors ${viewMode === 'list' ? 'bg-white shadow-sm text-on-surface' : 'text-outline hover:text-on-surface'}`}>
                   <span className="material-symbols-outlined text-[18px]">list</span>
                   List
                 </button>
-                <button className="px-4 py-1.5 rounded-md text-label-md text-outline hover:text-on-surface transition-colors flex items-center gap-2">
+                <button onClick={() => setViewMode('grid')} className={`px-4 py-1.5 rounded-md text-label-md flex items-center gap-2 transition-colors ${viewMode === 'grid' ? 'bg-white shadow-sm text-on-surface' : 'text-outline hover:text-on-surface'}`}>
                   <span className="material-symbols-outlined text-[18px]">grid_view</span>
                   Grid
                 </button>
@@ -120,7 +191,11 @@ const DriversPage = () => {
               </div>
             </div>
             <div className="flex flex-wrap items-center gap-3 w-full md:w-auto mt-2 md:mt-0">
-              <button className="text-label-md font-bold text-outline flex items-center gap-1 hover:bg-surface-container-low px-3 py-2 rounded-lg transition-colors border border-outline-variant">
+              <button onClick={() => setShowAddDriver(true)} className="bg-secondary text-white px-4 py-2 rounded-lg text-[12px] font-bold flex items-center gap-2 hover:opacity-90 transition-all shadow-sm">
+                <span className="material-symbols-outlined text-[18px]">person_add</span>
+                ADD DRIVER
+              </button>
+              <button onClick={handleExportCSV} className="text-label-md font-bold text-outline flex items-center gap-1 hover:bg-surface-container-low px-3 py-2 rounded-lg transition-colors border border-outline-variant">
                 <span className="material-symbols-outlined text-[18px]">file_download</span>
                 Export CSV
               </button>
@@ -196,6 +271,14 @@ const DriversPage = () => {
             </table>
           </div>
         </section>
+        {showAddDriver && (
+          <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50" onClick={() => setShowAddDriver(false)}>
+            <div className="bg-white rounded-xl p-8 w-full max-w-lg shadow-2xl" onClick={(e) => e.stopPropagation()}>
+              <h3 className="text-[20px] font-bold text-[#0b1c30] mb-6">Add New Driver</h3>
+              <DriverForm onSubmit={(data) => addDriverMutation.mutate(data)} onCancel={() => setShowAddDriver(false)} loading={addDriverMutation.isPending} />
+            </div>
+          </div>
+        )}
       </div>
     </MainLayout>
   );

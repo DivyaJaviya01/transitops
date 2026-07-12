@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import api from '../../services/api';
 import MainLayout from "../../components/layout/MainLayout.tsx";
 
@@ -17,9 +17,75 @@ const statusDot: Record<string, string> = {
   'Retired': 'bg-slate-700',
 };
 
+const VehicleForm = ({ onSubmit, onCancel, loading }: { onSubmit: (data: any) => void; onCancel: () => void; loading: boolean }) => {
+  const [form, setForm] = useState({ registrationNumber: '', name: '', type: 'Truck', maxLoadCapacity: 0, odometer: 0, acquisitionCost: 0, status: 'Available' });
+  return (
+    <form onSubmit={(e) => { e.preventDefault(); onSubmit(form); }} className="space-y-4">
+      <div>
+        <label className="text-[12px] font-bold text-[#76777d] uppercase tracking-wider">Registration Number</label>
+        <input value={form.registrationNumber} onChange={(e) => setForm({ ...form, registrationNumber: e.target.value })} className="w-full border border-[#c6c6cd] rounded-lg px-4 py-2.5 text-[14px] mt-1 focus:ring-[#0058be] focus:border-[#0058be]" placeholder="e.g. VT-1234-X" required />
+      </div>
+      <div>
+        <label className="text-[12px] font-bold text-[#76777d] uppercase tracking-wider">Vehicle Name</label>
+        <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full border border-[#c6c6cd] rounded-lg px-4 py-2.5 text-[14px] mt-1 focus:ring-[#0058be] focus:border-[#0058be]" placeholder="e.g. Volvo FH16" required />
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="text-[12px] font-bold text-[#76777d] uppercase tracking-wider">Type</label>
+          <select value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value })} className="w-full border border-[#c6c6cd] rounded-lg px-4 py-2.5 text-[14px] mt-1">
+            <option value="Truck">Truck</option>
+            <option value="Van">Van</option>
+            <option value="Sedan">Sedan</option>
+          </select>
+        </div>
+        <div>
+          <label className="text-[12px] font-bold text-[#76777d] uppercase tracking-wider">Status</label>
+          <select value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })} className="w-full border border-[#c6c6cd] rounded-lg px-4 py-2.5 text-[14px] mt-1">
+            <option value="Available">Available</option>
+            <option value="On Trip">On Trip</option>
+            <option value="In Shop">In Shop</option>
+            <option value="Retired">Retired</option>
+          </select>
+        </div>
+      </div>
+      <div className="grid grid-cols-3 gap-4">
+        <div>
+          <label className="text-[12px] font-bold text-[#76777d] uppercase tracking-wider">Max Load (kg)</label>
+          <input type="number" value={form.maxLoadCapacity} onChange={(e) => setForm({ ...form, maxLoadCapacity: Number(e.target.value) })} className="w-full border border-[#c6c6cd] rounded-lg px-4 py-2.5 text-[14px] mt-1" min="0" required />
+        </div>
+        <div>
+          <label className="text-[12px] font-bold text-[#76777d] uppercase tracking-wider">Odometer (km)</label>
+          <input type="number" value={form.odometer} onChange={(e) => setForm({ ...form, odometer: Number(e.target.value) })} className="w-full border border-[#c6c6cd] rounded-lg px-4 py-2.5 text-[14px] mt-1" min="0" />
+        </div>
+        <div>
+          <label className="text-[12px] font-bold text-[#76777d] uppercase tracking-wider">Cost ($)</label>
+          <input type="number" value={form.acquisitionCost} onChange={(e) => setForm({ ...form, acquisitionCost: Number(e.target.value) })} className="w-full border border-[#c6c6cd] rounded-lg px-4 py-2.5 text-[14px] mt-1" min="0" required />
+        </div>
+      </div>
+      <div className="flex justify-end gap-3 mt-6">
+        <button type="button" onClick={onCancel} className="px-6 py-2.5 rounded-lg text-[12px] font-bold text-[#76777d] border border-[#c6c6cd] hover:bg-gray-50">Cancel</button>
+        <button type="submit" disabled={loading} className="bg-[#0058be] text-white px-6 py-2.5 rounded-lg text-[12px] font-bold hover:opacity-90 disabled:opacity-50">{loading ? 'Saving...' : 'Save Vehicle'}</button>
+      </div>
+    </form>
+  );
+};
+
 const VehicleRegistry: React.FC = () => {
   const [statusFilter, setStatusFilter] = useState('');
   const [typeFilter, setTypeFilter] = useState('');
+  const [showAddVehicle, setShowAddVehicle] = useState(false);
+  const queryClient = useQueryClient();
+
+  const addVehicleMutation = useMutation({
+    mutationFn: async (data: any) => {
+      const res = await api.post('/vehicles', data);
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['vehicles'] });
+      setShowAddVehicle(false);
+    },
+  });
 
   const { data: vehicles, isLoading } = useQuery({
     queryKey: ['vehicles', statusFilter, typeFilter],
@@ -44,7 +110,7 @@ const VehicleRegistry: React.FC = () => {
               <span className="text-[#0058be] font-bold">All Assets</span>
             </div>
           </div>
-          <button className="bg-[#0058be] text-white px-6 py-2.5 rounded-lg text-[12px] font-semibold flex items-center gap-2 hover:opacity-90 active:opacity-80 transition-all shadow-sm">
+          <button onClick={() => setShowAddVehicle(true)} className="bg-[#0058be] text-white px-6 py-2.5 rounded-lg text-[12px] font-semibold flex items-center gap-2 hover:opacity-90 active:opacity-80 transition-all shadow-sm">
             <span className="material-symbols-outlined">add</span>
             ADD VEHICLE
           </button>
@@ -161,6 +227,15 @@ const VehicleRegistry: React.FC = () => {
             </table>
           </div>
         </div>
+
+        {showAddVehicle && (
+          <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50" onClick={() => setShowAddVehicle(false)}>
+            <div className="bg-white rounded-xl p-8 w-full max-w-lg shadow-2xl" onClick={(e) => e.stopPropagation()}>
+              <h3 className="text-[20px] font-bold text-[#0b1c30] mb-6">Add New Vehicle</h3>
+              <VehicleForm onSubmit={(data) => addVehicleMutation.mutate(data)} onCancel={() => setShowAddVehicle(false)} loading={addVehicleMutation.isPending} />
+            </div>
+          </div>
+        )}
       </div>
     </MainLayout>
   );
