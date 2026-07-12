@@ -345,22 +345,22 @@ erDiagram
 
 ### Business Rules Enforced
 
-- `[x]` **Vehicle capacity check** before dispatching trips
-- `[x] **Driver license expiry validation** before dispatch
-- `[x] **Vehicle/driver availability** — auto-set when trip dispatched/completed/cancelled
-- `[x]` **Maintenance ↔ vehicle sync** — vehicle set to `In Shop` on maintenance create, reverted on close
-- `[x] **Fuel log auto-creation** on trip completion
-- `[x] **Expense auto-generation** on maintenance close
-- `[x] **Cascading cache invalidation** — trip/expense/maintenance mutations refresh all related queries
+- Vehicle capacity check before dispatching trips
+- Driver license expiry validation before dispatch
+- Vehicle/driver availability — auto-set when trip dispatched/completed/cancelled
+- Maintenance ↔ vehicle sync — vehicle set to `In Shop` on maintenance create, reverted on close
+- Fuel log auto-creation on trip completion
+- Expense auto-generation on maintenance close
+- Cascading cache invalidation — trip/expense/maintenance mutations refresh all related queries
 
 ### UI Features
 
-- `[x] **Dark/Light theme** — System preference + manual toggle (persisted in localStorage)
-- `[x] **Responsive design** — Desktop-first with mobile breakpoints
-- `[x] **List/Grid views** on Drivers and Vehicles pages
-- `[x] **CSV export** on all data pages
-- `[x] **Notification system** — Unread badge, mark-as-read
-- `[x] **Optimistic UI** with React Query cache invalidation
+- Dark/Light theme — System preference + manual toggle (persisted in localStorage)
+- Responsive design — Desktop-first with mobile breakpoints
+- List/Grid views on Drivers and Vehicles pages
+- CSV export on all data pages
+- Notification system — Unread badge, mark-as-read
+- Optimistic UI with React Query cache invalidation
 
 ---
 
