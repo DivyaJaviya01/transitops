@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { FiSearch, FiBell, FiShield, FiChevronDown, FiSun, FiMoon, FiMenu, FiLogOut, FiCheck, FiCheckCheck, FiInfo, FiAlertTriangle, FiAlertCircle, FiCheckCircle } from 'react-icons/fi';
+import { FiSearch, FiBell, FiShield, FiChevronDown, FiSun, FiMoon, FiMenu, FiLogOut, FiCheck, FiInfo, FiAlertTriangle, FiAlertCircle, FiCheckCircle } from 'react-icons/fi';
 import { useTheme } from '../../context/ThemeContext';
 import { useAuth } from '../../context/AuthContext';
 import api from '../../services/api';
@@ -113,7 +113,7 @@ function Navbar({ onToggleSidebar }: NavbarProps) {
                 <h3>Notifications</h3>
                 {unreadCount > 0 && (
                   <button className="notif-mark-all" onClick={() => markAllRead.mutate()}>
-                    <FiCheckCheck size={14} /> Mark all read
+                    <FiCheckCircle size={14} /> Mark all read
                   </button>
                 )}
               </div>
