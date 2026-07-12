@@ -36,7 +36,7 @@
 | <img src="https://github.com/DivyaJaviya01.png?size=40" width="32" height="32" style="border-radius:50%"> | **Divya Javiya** | Full Stack Developer | [@DivyaJaviya01](https://github.com/DivyaJaviya01) |
 | <img src="https://github.com/krisha-akbari8326.png?size=40" width="32" height="32" style="border-radius:50%"> | **Krisha Akbari** | Frontend Developer | [@krisha-akbari8326](https://github.com/krisha-akbari8326) |
 | <img src="https://github.com/khushop03.png?size=40" width="32" height="32" style="border-radius:50%"> | **Khush Dobariya** | Backend Developer | [@khushop03](https://github.com/khushop03) |
-| <img src="https://github.com/RJV-44.png?size=40" width="32" height="32" style="border-radius:50%"> | **Rajvi Kachhadiya** | UI/UX Designer | [@RJV-44](https://github.com/RJV-44) |
+| <img src="https://github.com/RJV-44.png?size=40" width="32" height="32" style="border-radius:50%"> | **Rajvi Lunagariya** | UI/UX Designer | [@RJV-44](https://github.com/RJV-44) |
 
 ---
 
